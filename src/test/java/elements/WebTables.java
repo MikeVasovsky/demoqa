@@ -26,6 +26,7 @@ public class WebTables {
         $("#salary").setValue("33");
         $("#department").setValue("dep");
         $("#submit").click();
+
         $("#registration-form-modal").shouldBe(visible);
     }
 }

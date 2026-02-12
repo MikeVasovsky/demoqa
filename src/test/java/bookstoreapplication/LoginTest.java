@@ -24,6 +24,7 @@ public class LoginTest {
         $("#userName").sendKeys("login");
         $("#password").sendKeys("wtf");
         $("#login").click();
+
         assertEquals("Invalid username or password!",
                 $("#name").getText());
     }
