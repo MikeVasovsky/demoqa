@@ -1,27 +1,23 @@
-package elements;
+package tests.elements;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Configuration.baseUrl;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$$;
+import static tests.testdata.TestData.*;
 
-public class WebTables {
+public class WebTables extends TestBase {
 
-    @BeforeAll
-    static void beforeAll() {
-        baseUrl = "https://demoqa.com/webtables";
-        Configuration.browserSize = "1980x1080";
-        Configuration.pageLoadStrategy = "eager";
-    }
     @Test
     void formStayIfOneFieldIsEmpty() {
-        open(baseUrl);
+        open("");
+        $$(".card-body").findBy(text("Elements")).click();
+        $$(".router-link").findBy(text("Web Tables")).click();
         $("#addNewRecordButton").click();
-        $("#firstName").setValue("name");
+        $("#firstName").setValue(firstName);
         $("#age").setValue("33");
         $("#salary").setValue("33");
         $("#department").setValue("dep");
