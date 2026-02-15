@@ -1,28 +1,23 @@
-package bookstoreapplication;
+package tests.bookstoreapplication;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
-import static com.codeborne.selenide.Configuration.baseUrl;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static tests.testdata.TestData.*;
 
 
-public class LoginTest {
-
-    @BeforeAll
-    static void beforeAll() {
-        baseUrl = "https://demoqa.com/login";
-        Configuration.browserSize = "1980x1080";
-        Configuration.pageLoadStrategy = "eager";
-    }
+public class LoginTest extends TestBase {
 
     @Test
     void errorIfUserNotRegistered() {
-        open(baseUrl);
-        $("#userName").sendKeys("login");
-        $("#password").sendKeys("wtf");
+        open("");
+        $$(".card-body").findBy(text("Book Store Application")).click();
+        $$(".router-link").findBy(text("Login")).click();
+        $("#userName").sendKeys("1");
+        $("#password").sendKeys("1");
         $("#login").click();
 
         assertEquals("Invalid username or password!",
@@ -32,12 +27,14 @@ public class LoginTest {
     @Test
     void errorIfUserDontVerifyReCaptchaToRegister() {
         String expectedMessage = "Please verify reCaptcha to register!";
-        open(baseUrl);
+        open("");
+        $$(".card-body").findBy(text("Book Store Application")).click();
+        $$(".router-link").findBy(text("Login")).click();
         $("#newUser").click();
-        $("#firstname").setValue("name");
-        $("#lastname").setValue("lastName");
-        $("#userName").setValue("username");
-        $("#password").setValue("wtf");
+        $("#firstname").setValue(firstName);
+        $("#lastname").setValue(lastName);
+        $("#userName").setValue(username);
+        $("#password").setValue(password);
         $("#register").click();
 
         assertEquals(expectedMessage, $(".mb-1").getText());
