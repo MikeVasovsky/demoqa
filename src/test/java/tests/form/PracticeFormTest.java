@@ -19,28 +19,28 @@ public class PracticeFormTest extends TestBase {
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(userEmail);
         $("#userNumber").setValue(userNumber);
-        $("#genterWrapper").$(byText("Female")).click();
+        $("#genterWrapper").$(byText(sex)).click();
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").$(byText("May")).click();
-        $(".react-datepicker__year-select").$(byText("1990")).click();
+        $(".react-datepicker__month-select").$(byText(month)).click();
+        $(".react-datepicker__year-select").$(byText(year)).click();
         $(".react-datepicker__day--010:not(.react-datepicker__day--outside-month)").click();
-        $("#subjectsInput").setValue("arts").pressEnter();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
+        $("#subjectsInput").setValue(subject).pressEnter();
+        $("#hobbiesWrapper").$(byText(hobbies)).click();
         $("#uploadPicture").uploadFromClasspath("sample-clouds-400x300.jpg");
         $("#currentAddress").setValue(currentAddress);
-        $("#react-select-3-input").setValue("NCR").pressEnter();
-        $("#react-select-4-input").setValue("Delhi").pressEnter();
+        $("#react-select-3-input").setValue(state).pressEnter();
+        $("#react-select-4-input").setValue(city).pressEnter();
         $("#submit").click();
         //Блок проверки результата
         $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
-        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Female"));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(sex));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("10 May,1990"));
-        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Arts"));
-        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Sport"));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("10 "+month+","+year));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subject));
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text(hobbies));
         $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("sample-clouds-400x300.jpg"));
         $(".table-responsive").$(byText("Address")).parent().shouldHave(text(currentAddress));
-        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("NCR Delhi"));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text(state+" "+city));
     }
 }
