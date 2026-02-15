@@ -1,14 +1,15 @@
-package bookstoreapplication;
+package tests.bookstoreapplication;
 
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static testdata.TestData.*;
+import static tests.testdata.TestData.*;
 
 
-public class LoginTest extends tests.TestBase {
+public class LoginTest extends TestBase {
 
     @Test
     void errorIfUserNotRegistered() {

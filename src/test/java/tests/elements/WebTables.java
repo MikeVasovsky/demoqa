@@ -1,14 +1,15 @@
-package elements;
+package tests.elements;
 
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static testdata.TestData.*;
+import static tests.testdata.TestData.*;
 
-public class WebTables extends tests.TestBase {
+public class WebTables extends TestBase {
 
     @Test
     void formStayIfOneFieldIsEmpty() {
