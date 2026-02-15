@@ -11,7 +11,7 @@ import static tests.testdata.TestData.*;
 public class PracticeFormTest extends TestBase {
 
     @Test
-    void correctRegistration() {
+    void correctRegistrationTest() {
         open("");
         $$(".card-body").findBy(text("Forms")).click();
         $$(".router-link").findBy(text("Practice Form")).click();
@@ -21,11 +21,9 @@ public class PracticeFormTest extends TestBase {
         $("#userNumber").setValue(userNumber);
         $("#genterWrapper").$(byText("Female")).click();
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").click();
-        $("[value='2025']").click();
-        $(".react-datepicker__month-select").click();
-        $("[value='4']").click();
-        $("[aria-label='Choose Sunday, May 11th, 2025']").click();
+        $(".react-datepicker__month-select").$(byText("May")).click();
+        $(".react-datepicker__year-select").$(byText("1990")).click();
+        $(".react-datepicker__day--010:not(.react-datepicker__day--outside-month)").click();
         $("#subjectsInput").setValue("arts").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("sample-clouds-400x300.jpg");
@@ -38,7 +36,7 @@ public class PracticeFormTest extends TestBase {
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Female"));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("11 May,2025"));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("10 May,1990"));
         $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Arts"));
         $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Sport"));
         $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("sample-clouds-400x300.jpg"));

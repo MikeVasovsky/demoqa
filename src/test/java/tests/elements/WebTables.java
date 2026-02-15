@@ -12,7 +12,7 @@ import static tests.testdata.TestData.*;
 public class WebTables extends TestBase {
 
     @Test
-    void formStayIfOneFieldIsEmpty() {
+    void formStayIfOneFieldIsEmptyTest() {
         open("");
         $$(".card-body").findBy(text("Elements")).click();
         $$(".router-link").findBy(text("Web Tables")).click();

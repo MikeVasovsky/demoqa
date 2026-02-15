@@ -8,14 +8,14 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
     @BeforeAll
-    static void beforeAll() {
+    static void setUp(){
         Configuration.browserSize = "2560x1440";
         Configuration.baseUrl = "https://demoqa.com/";
         Configuration.pageLoadStrategy = "eager";
     }
 
     @AfterEach
-    void afterEach() {
+    void afterTest() {
         closeWebDriver();
     }
 }

@@ -12,7 +12,7 @@ import static tests.testdata.TestData.*;
 public class LoginTest extends TestBase {
 
     @Test
-    void errorIfUserNotRegistered() {
+    void errorIfUserNotRegisteredTest() {
         open("");
         $$(".card-body").findBy(text("Book Store Application")).click();
         $$(".router-link").findBy(text("Login")).click();
@@ -25,7 +25,7 @@ public class LoginTest extends TestBase {
     }
 
     @Test
-    void errorIfUserDontVerifyReCaptchaToRegister() {
+    void errorIfUserDontVerifyReCaptchaToRegisterTest() {
         String expectedMessage = "Please verify reCaptcha to register!";
         open("");
         $$(".card-body").findBy(text("Book Store Application")).click();

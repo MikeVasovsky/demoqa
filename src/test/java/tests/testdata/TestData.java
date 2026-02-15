@@ -7,7 +7,5 @@ public class TestData {
     public static String userNumber = "8800888776";
     public static String currentAddress = "my_address";
     public static String username = "username";
-    public static String login = "login";
     public static String password = "address";
-
 }
