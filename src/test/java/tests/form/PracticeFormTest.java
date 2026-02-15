@@ -2,7 +2,6 @@ package tests.form;
 
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selectors.byText;
@@ -13,7 +12,7 @@ public class PracticeFormTest extends TestBase {
 
     @Test
     void correctRegistration() {
-        open(baseUrl + "automation-practice-form");
+        open(baseUrl + "/automation-practice-form");
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(userEmail);
