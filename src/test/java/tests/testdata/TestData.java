@@ -17,4 +17,11 @@ public class TestData {
     public static String username = "username";
     public static String password = "address";
 
+    public static String badLogin = "2";
+    public static String badPassword = "2";
+
+    public static String badAge = "2";
+    public static String badSalary = "2";
+    public static String badDepartament = "dp";
+
 }

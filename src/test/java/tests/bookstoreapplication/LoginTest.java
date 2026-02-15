@@ -16,8 +16,8 @@ public class LoginTest extends TestBase {
         open("");
         $$(".card-body").findBy(text("Book Store Application")).click();
         $$(".router-link").findBy(text("Login")).click();
-        $("#userName").sendKeys("1");
-        $("#password").sendKeys("1");
+        $("#userName").sendKeys(badLogin);
+        $("#password").sendKeys(badPassword);
         $("#login").click();
 
         assertEquals("Invalid username or password!",

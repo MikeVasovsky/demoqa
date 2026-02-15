@@ -18,9 +18,9 @@ public class WebTables extends TestBase {
         $$(".router-link").findBy(text("Web Tables")).click();
         $("#addNewRecordButton").click();
         $("#firstName").setValue(firstName);
-        $("#age").setValue("33");
-        $("#salary").setValue("33");
-        $("#department").setValue("dep");
+        $("#age").setValue(badAge);
+        $("#salary").setValue(badSalary);
+        $("#department").setValue(badDepartament);
         $("#submit").click();
 
         $("#registration-form-modal").shouldBe(visible);
