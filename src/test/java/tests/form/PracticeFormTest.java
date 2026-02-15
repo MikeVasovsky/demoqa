@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static tests.testdata.TestData.*;
 
-public class PracticeFormTest extends TestBase {
+public class PracticeFormTest extends TestBase{
 
     @Test
     void correctRegistration() {
