@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 public class TestBase {
     @BeforeAll
     static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
+        Configuration.browserSize = "2560x1440";
         Configuration.baseUrl = "https://demoqa.com/";
         Configuration.pageLoadStrategy = "eager";
     }

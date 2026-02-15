@@ -3,7 +3,7 @@ package tests.bookstoreapplication;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
-import static com.codeborne.selenide.Configuration.baseUrl;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tests.testdata.TestData.*;
@@ -13,9 +13,11 @@ public class LoginTest extends TestBase {
 
     @Test
     void errorIfUserNotRegistered() {
-        open(baseUrl + "/login");
-        $("#userName").sendKeys(login);
-        $("#password").sendKeys(password);
+        open("");
+        $$(".card-body").findBy(text("Book Store Application")).click();
+        $$(".router-link").findBy(text("Login")).click();
+        $("#userName").sendKeys("1");
+        $("#password").sendKeys("1");
         $("#login").click();
 
         assertEquals("Invalid username or password!",
@@ -25,7 +27,9 @@ public class LoginTest extends TestBase {
     @Test
     void errorIfUserDontVerifyReCaptchaToRegister() {
         String expectedMessage = "Please verify reCaptcha to register!";
-        open(baseUrl + "/login");
+        open("");
+        $$(".card-body").findBy(text("Book Store Application")).click();
+        $$(".router-link").findBy(text("Login")).click();
         $("#newUser").click();
         $("#firstname").setValue(firstName);
         $("#lastname").setValue(lastName);

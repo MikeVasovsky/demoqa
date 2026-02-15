@@ -2,8 +2,8 @@ package tests.form;
 
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
+
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static tests.testdata.TestData.*;
@@ -12,7 +12,9 @@ public class PracticeFormTest extends TestBase {
 
     @Test
     void correctRegistration() {
-        open(baseUrl + "/automation-practice-form");
+        open("");
+        $$(".card-body").findBy(text("Forms")).click();
+        $$(".router-link").findBy(text("Practice Form")).click();
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(userEmail);
@@ -32,7 +34,7 @@ public class PracticeFormTest extends TestBase {
         $("#react-select-4-input").setValue("Delhi").pressEnter();
         $("#submit").click();
         //Блок проверки результата
-        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + "" + lastName));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Female"));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
