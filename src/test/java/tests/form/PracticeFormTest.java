@@ -26,7 +26,7 @@ public class PracticeFormTest extends TestBase {
         $(".react-datepicker__day--010:not(.react-datepicker__day--outside-month)").click();
         $("#subjectsInput").setValue(subject).pressEnter();
         $("#hobbiesWrapper").$(byText(hobbies)).click();
-        $("#uploadPicture").uploadFromClasspath("sample-clouds-400x300.jpg");
+        $("#uploadPicture").uploadFromClasspath(pictureName);
         $("#currentAddress").setValue(currentAddress);
         $("#react-select-3-input").setValue(state).pressEnter();
         $("#react-select-4-input").setValue(city).pressEnter();
@@ -36,10 +36,10 @@ public class PracticeFormTest extends TestBase {
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(sex));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("10 "+month+","+year));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text(day+" "+month+","+year));
         $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subject));
         $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text(hobbies));
-        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("sample-clouds-400x300.jpg"));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text(pictureName));
         $(".table-responsive").$(byText("Address")).parent().shouldHave(text(currentAddress));
         $(".table-responsive").$(byText("State and City")).parent().shouldHave(text(state+" "+city));
     }

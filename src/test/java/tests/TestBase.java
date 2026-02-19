@@ -15,7 +15,7 @@ public class TestBase {
     }
 
     @AfterEach
-    void afterTest() {
+    void closeBroswer() {
         closeWebDriver();
     }
 }
