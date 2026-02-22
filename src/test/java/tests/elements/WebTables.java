@@ -14,6 +14,10 @@ public class WebTables extends TestBase {
     @Test
     void formStayIfOneFieldIsEmptyTest() {
         open("");
+        executeJavaScript("""
+                document.getElementById('fixedban')?.remove();
+                document.querySelector('footer')?.remove();
+                """);
         $$(".card-body").findBy(text("Elements")).click();
         $$(".router-link").findBy(text("Web Tables")).click();
         $("#addNewRecordButton").click();

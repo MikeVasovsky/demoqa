@@ -14,6 +14,10 @@ public class LoginTest extends TestBase {
     @Test
     void errorIfUserNotRegisteredTest() {
         open("");
+        executeJavaScript("""
+                document.getElementById('fixedban')?.remove();
+                document.querySelector('footer')?.remove();
+                """);
         $$(".card-body").findBy(text("Book Store Application")).click();
         $$(".router-link").findBy(text("Login")).click();
         $("#userName").sendKeys(badLogin);
@@ -28,6 +32,10 @@ public class LoginTest extends TestBase {
     void errorIfUserDontVerifyReCaptchaToRegisterTest() {
         String expectedMessage = "Please verify reCaptcha to register!";
         open("");
+        executeJavaScript("""
+                document.getElementById('fixedban')?.remove();
+                document.querySelector('footer')?.remove();
+                """);
         $$(".card-body").findBy(text("Book Store Application")).click();
         $$(".router-link").findBy(text("Login")).click();
         $("#newUser").click();

@@ -13,6 +13,10 @@ public class PracticeFormTest extends TestBase {
     @Test
     void correctRegistrationTest() {
         open("");
+        executeJavaScript("""
+                document.getElementById('fixedban')?.remove();
+                document.querySelector('footer')?.remove();
+                """);
         $$(".card-body").findBy(text("Forms")).click();
         $$(".router-link").findBy(text("Practice Form")).click();
         $("#firstName").setValue(firstName);
@@ -36,11 +40,11 @@ public class PracticeFormTest extends TestBase {
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(sex));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text(day+" "+month+","+year));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text(day + " " + month + "," + year));
         $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subject));
         $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text(hobbies));
         $(".table-responsive").$(byText("Picture")).parent().shouldHave(text(pictureName));
         $(".table-responsive").$(byText("Address")).parent().shouldHave(text(currentAddress));
-        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text(state+" "+city));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text(state + " " + city));
     }
 }
