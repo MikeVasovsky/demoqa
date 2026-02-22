@@ -3,6 +3,7 @@ package tests.pages;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class WebTablesPage {
@@ -16,6 +17,7 @@ public class WebTablesPage {
     private SelenideElement departmentInput = $("#department");
     private SelenideElement submitBtn = $("#submit");
     private SelenideElement resultFld = $(".container-fluid");
+    private SelenideElement registrrationForm = $("#registration-form-modal");
 
     public WebTablesPage openPage() {
         open("");
@@ -64,10 +66,13 @@ public class WebTablesPage {
         return this;
     }
 
-    public WebTablesPage checkWebTableHaveValue(String... value) {
+    public void checkWebTableHaveValue(String... value) {
         for (String s : value) {
             resultFld.shouldHave(text(s));
         }
-        return this;
+    }
+
+    public void registrationFormShouldBeVisible() {
+        registrrationForm.shouldBe(visible);
     }
 }

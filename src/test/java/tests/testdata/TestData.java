@@ -16,6 +16,7 @@ public class TestData {
     public static String day = "010";
     public static String month = "May";
     public static String year = "1990";
+    public static String resultDay = day.substring(1);
 
     public static String state = "NCR";
     public static String city = "Delhi";
@@ -23,17 +24,13 @@ public class TestData {
     public static String pictureName = "sample-clouds-400x300.jpg";
 
     public static String username = "Username!?";
-    public static String password = "qqq111QQQ!!!?";
 
     public static String badLogin = "2";
     public static String badPassword = "2";
 
     public static String age = "22";
-    public static String badAge = "2";
     public static String salary = "20";
-    public static String badSalary = "2";
     public static String departament = "dp";
-    public static String badDepartament = "dp";
 
     public static String[] expectedResultValues = {
             username,
@@ -62,21 +59,21 @@ public class TestData {
             "Picture",
             "Address",
             "State and City"
-        };
+    };
 
     public static String[] resultInTab = {
             firstName + " " + lastName,
             userEmail,
             sex,
             userNumber,
-            day + month + "," + year,
+            resultDay + " " + month + "," + year,
             subject,
             hobbies,
             pictureName,
             currentAddress,
             state + " " + city
-        };
-    }
+    };
+}
 
 
 
