@@ -13,7 +13,10 @@ public class LoginPage {
 
     public LoginPage openPage() {
         open("");
-
+        executeJavaScript("""
+                document.getElementById('fixedban')?.remove();
+                document.querySelector('footer')?.remove();
+                """);
         $$(".card-body").findBy(text("Book Store Application"))
                 .scrollTo().click();
         $$(".router-link").findBy(text("Login")).click();

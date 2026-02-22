@@ -28,6 +28,10 @@ public class PracticeFormPage {
 
     public PracticeFormPage openPage() {
         open("");
+        executeJavaScript("""
+                document.getElementById('fixedban')?.remove();
+                document.querySelector('footer')?.remove();
+                """);
         $$(".card-body").findBy(text("Forms")).click();
         $$(".router-link").findBy(text("Practice Form")).click();
         return this;

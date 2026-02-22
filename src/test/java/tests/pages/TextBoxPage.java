@@ -17,6 +17,10 @@ public class TextBoxPage {
 
     public TextBoxPage openPage() {
         open("");
+        executeJavaScript("""
+                document.getElementById('fixedban')?.remove();
+                document.querySelector('footer')?.remove();
+                """);
         $$(".card-body").findBy(text("Elements")).click();
         $$(".router-link").findBy(text("Text Box")).click();
         return this;
@@ -52,10 +56,9 @@ public class TextBoxPage {
         return this;
     }
 
-    public TextBoxPage elementShouldNotFind(String... value) {
+    public void elementShouldNotFind(String... value) {
         for (String s : value) {
             outputResults.shouldNot(text(s));
         }
-        return this;
     }
 }
