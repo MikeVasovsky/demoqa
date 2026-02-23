@@ -1,6 +1,8 @@
 package tests.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import tests.pages.components.CalendarComponent;
+import tests.pages.components.TableResultComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -8,15 +10,15 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormPage {
 
+    CalendarComponent calendarComponent = new CalendarComponent();
+    TableResultComponent tableResultComponent = new TableResultComponent();
+
     private SelenideElement firstNameInput = $("#firstName");
     private SelenideElement lastNameInput = $("#lastName");
     private SelenideElement userEmailInput = $("#userEmail");
     private SelenideElement userNumberInput = $("#userNumber");
     private SelenideElement genderWrapperBtn = $("#genterWrapper");
-    private SelenideElement dateOfBirthInput = $("#dateOfBirthInput");
-    private SelenideElement monthInput = $(".react-datepicker__month-select");
-    private SelenideElement yearInput = $(".react-datepicker__year-select");
-    private SelenideElement dayInput = $(".react-datepicker__day--010:not(.react-datepicker__day--outside-month)");
+    private SelenideElement dateInput = $("#dateOfBirthInput");
     private SelenideElement subjectsInput = $("#subjectsInput");
     private SelenideElement hobbiesWrapperBtn = $("#hobbiesWrapper");
     private SelenideElement uploadPictureInput = $("#uploadPicture");
@@ -24,16 +26,19 @@ public class PracticeFormPage {
     private SelenideElement stateInput = $("#react-select-3-input");
     private SelenideElement cityInput = $("#react-select-4-input");
     private SelenideElement submitBtn = $("#submit");
-    private SelenideElement resultTab = $(".table-responsive");
 
     public PracticeFormPage openPage() {
         open("");
+        $$(".card-body").findBy(text("Forms")).click();
+        $$(".router-link").findBy(text("Practice Form")).click();
+        return this;
+    }
+
+    public PracticeFormPage removeBanner() {
         executeJavaScript("""
                 document.getElementById('fixedban')?.remove();
                 document.querySelector('footer')?.remove();
                 """);
-        $$(".card-body").findBy(text("Forms")).click();
-        $$(".router-link").findBy(text("Practice Form")).click();
         return this;
     }
 
@@ -62,22 +67,9 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage setMonth(String value) {
-        dateOfBirthInput.click();
-        monthInput.$(byText(value)).click();
-        return this;
-    }
-
-    public PracticeFormPage setYear(String value) {
-        dateOfBirthInput.click();
-        yearInput.$(byText(value)).click();
-        return this;
-    }
-
-    public PracticeFormPage setDay(String value) {
-        dateOfBirthInput.click();
-        dayInput = $(".react-datepicker__day--" + value + ":not(.react-datepicker__day--outside-month)");
-        dayInput.click();
+    public PracticeFormPage setDateOfBirth(String day, String month, String year) {
+        dateInput.click();
+        calendarComponent.setDate(day, month, year);
         return this;
     }
 
@@ -113,10 +105,9 @@ public class PracticeFormPage {
         return this;
     }
 
-    public void checkResult(String[] tab, String[] result) {
-        for (int i = 0; i < tab.length; i++) {
-            resultTab.$(byText(tab[i])).parent().shouldHave(text(result[i]));
-        }
+    public PracticeFormPage checkResult(String tab, String value) {
+        tableResultComponent.checkResult(tab, value);
+        return this;
     }
 }
 

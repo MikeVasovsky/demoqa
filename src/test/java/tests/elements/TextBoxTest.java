@@ -14,6 +14,7 @@ public class TextBoxTest extends TestBase {
     @Test
     void successSubmitTest() {
         textBoxPage.openPage()
+                .removeBanner()
                 .setFullName(username)
                 .setEmail(userEmail)
                 .setCurrentAddress(currentAddress)

@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class LoginPage {
+
     private SelenideElement usernameInput = $("#userName");
     private SelenideElement passwordInput = $("#password");
     private SelenideElement loginBtn = $("#login");
@@ -13,15 +14,20 @@ public class LoginPage {
 
     public LoginPage openPage() {
         open("");
-        executeJavaScript("""
-                document.getElementById('fixedban')?.remove();
-                document.querySelector('footer')?.remove();
-                """);
         $$(".card-body").findBy(text("Book Store Application"))
                 .scrollTo().click();
         $$(".router-link").findBy(text("Login")).click();
         return this;
     }
+
+    public LoginPage removeBanner() {
+        executeJavaScript("""
+                document.getElementById('fixedban')?.remove();
+                document.querySelector('footer')?.remove();
+                """);
+        return this;
+    }
+
 
     public LoginPage setUsernameInput(String value) {
         usernameInput.setValue(value);

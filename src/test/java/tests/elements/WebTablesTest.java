@@ -13,6 +13,7 @@ public class WebTablesTest extends TestBase {
     @Test
     void formStayIfOneFieldIsEmptyTest() {
         webTablesPage.openPage()
+                .removeBanner()
                 .clickAddRecordBtn()
                 .setFirstname(firstName)
                 .setLastname(lastName)

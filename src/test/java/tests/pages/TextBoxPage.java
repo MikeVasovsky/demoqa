@@ -17,12 +17,16 @@ public class TextBoxPage {
 
     public TextBoxPage openPage() {
         open("");
+        $$(".card-body").findBy(text("Elements")).click();
+        $$(".router-link").findBy(text("Text Box")).click();
+        return this;
+    }
+
+    public TextBoxPage removeBanner() {
         executeJavaScript("""
                 document.getElementById('fixedban')?.remove();
                 document.querySelector('footer')?.remove();
                 """);
-        $$(".card-body").findBy(text("Elements")).click();
-        $$(".router-link").findBy(text("Text Box")).click();
         return this;
     }
 

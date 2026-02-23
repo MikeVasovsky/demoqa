@@ -15,6 +15,7 @@ public class LoginTest extends TestBase {
     void errorIfUserNotRegisteredTest() {
         loginPage
                 .openPage()
+                .removeBanner()
                 .setUsernameInput(badLogin)
                 .setPasswordInput(badPassword)
                 .clickLogin()
