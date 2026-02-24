@@ -47,32 +47,6 @@ public class TestData {
             salary,
             departament
     };
-
-    public static String[] tabs = {
-            "Student Name",
-            "Student Email",
-            "Gender",
-            "Mobile",
-            "Date of Birth",
-            "Subjects",
-            "Hobbies",
-            "Picture",
-            "Address",
-            "State and City"
-    };
-
-    public static String[] resultInTab = {
-            firstName + " " + lastName,
-            userEmail,
-            sex,
-            userNumber,
-            resultDay + " " + month + "," + year,
-            subject,
-            hobbies,
-            pictureName,
-            currentAddress,
-            state + " " + city
-    };
 }
 
 

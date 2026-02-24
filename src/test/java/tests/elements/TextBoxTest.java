@@ -27,7 +27,7 @@ public class TextBoxTest extends TestBase {
     }
 
     @Test
-    void stayOnPageIfEmailIncorrectTest(){
+    void stayOnPageIfEmailIncorrectTest() {
         textBoxPage.openPage()
                 .setFullName(username)
                 .setEmail(badUserEmail)

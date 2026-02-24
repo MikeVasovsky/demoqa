@@ -19,7 +19,7 @@ public class PracticeFormTest extends TestBase {
                 .setEmail(userEmail)
                 .setNumber(userNumber)
                 .setGender(sex)
-                .setDateOfBirth(day,month,year)
+                .setDateOfBirth(day, month, year)
                 .setSubject(subject)
                 .setHobbie(hobbies)
                 .uploadPicture(pictureName)
