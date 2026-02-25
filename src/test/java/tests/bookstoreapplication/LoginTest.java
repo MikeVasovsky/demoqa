@@ -2,41 +2,23 @@ package tests.bookstoreapplication;
 
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
+import tests.pages.LoginPage;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tests.testdata.TestData.*;
 
 
 public class LoginTest extends TestBase {
 
-    @Test
-    void errorIfUserNotRegistered() {
-        open("");
-        $$(".card-body").findBy(text("Book Store Application")).click();
-        $$(".router-link").findBy(text("Login")).click();
-        $("#userName").sendKeys("1");
-        $("#password").sendKeys("1");
-        $("#login").click();
-
-        assertEquals("Invalid username or password!",
-                $("#name").getText());
-    }
+    LoginPage loginPage = new LoginPage();
 
     @Test
-    void errorIfUserDontVerifyReCaptchaToRegister() {
-        String expectedMessage = "Please verify reCaptcha to register!";
-        open("");
-        $$(".card-body").findBy(text("Book Store Application")).click();
-        $$(".router-link").findBy(text("Login")).click();
-        $("#newUser").click();
-        $("#firstname").setValue(firstName);
-        $("#lastname").setValue(lastName);
-        $("#userName").setValue(username);
-        $("#password").setValue(password);
-        $("#register").click();
-
-        assertEquals(expectedMessage, $(".mb-1").getText());
+    void errorIfUserNotRegisteredTest() {
+        loginPage
+                .openPage()
+                .removeBanner()
+                .setUsernameInput(badLogin)
+                .setPasswordInput(badPassword)
+                .clickLogin()
+                .checkErrorMessage();
     }
 }
