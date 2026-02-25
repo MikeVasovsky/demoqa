@@ -8,43 +8,41 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static tests.testdata.TestData.*;
 
-public class PracticeFormTest extends TestBase {
+public class PracticeFormTest extends TestBase{
 
     @Test
-    void correctRegistrationTest() {
+    void correctRegistration() {
         open("");
-        executeJavaScript("""
-                document.getElementById('fixedban')?.remove();
-                document.querySelector('footer')?.remove();
-                """);
         $$(".card-body").findBy(text("Forms")).click();
         $$(".router-link").findBy(text("Practice Form")).click();
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(userEmail);
         $("#userNumber").setValue(userNumber);
-        $("#genterWrapper").$(byText(sex)).click();
+        $("#genterWrapper").$(byText("Female")).click();
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").$(byText(month)).click();
-        $(".react-datepicker__year-select").$(byText(year)).click();
-        $(".react-datepicker__day--010:not(.react-datepicker__day--outside-month)").click();
-        $("#subjectsInput").setValue(subject).pressEnter();
-        $("#hobbiesWrapper").$(byText(hobbies)).click();
-        $("#uploadPicture").uploadFromClasspath(pictureName);
+        $(".react-datepicker__year-select").click();
+        $("[value='2025']").click();
+        $(".react-datepicker__month-select").click();
+        $("[value='4']").click();
+        $("[aria-label='Choose Sunday, May 11th, 2025']").click();
+        $("#subjectsInput").setValue("arts").pressEnter();
+        $("#hobbiesWrapper").$(byText("Sports")).click();
+        $("#uploadPicture").uploadFromClasspath("sample-clouds-400x300.jpg");
         $("#currentAddress").setValue(currentAddress);
-        $("#react-select-3-input").setValue(state).pressEnter();
-        $("#react-select-4-input").setValue(city).pressEnter();
+        $("#react-select-3-input").setValue("NCR").pressEnter();
+        $("#react-select-4-input").setValue("Delhi").pressEnter();
         $("#submit").click();
         //Блок проверки результата
         $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
-        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(sex));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Female"));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text(day + " " + month + "," + year));
-        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subject));
-        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text(hobbies));
-        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text(pictureName));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("11 May,2025"));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Arts"));
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Sport"));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("sample-clouds-400x300.jpg"));
         $(".table-responsive").$(byText("Address")).parent().shouldHave(text(currentAddress));
-        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text(state + " " + city));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("NCR Delhi"));
     }
 }

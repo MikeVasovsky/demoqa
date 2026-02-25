@@ -12,19 +12,15 @@ import static tests.testdata.TestData.*;
 public class WebTables extends TestBase {
 
     @Test
-    void formStayIfOneFieldIsEmptyTest() {
+    void formStayIfOneFieldIsEmpty() {
         open("");
-        executeJavaScript("""
-                document.getElementById('fixedban')?.remove();
-                document.querySelector('footer')?.remove();
-                """);
         $$(".card-body").findBy(text("Elements")).click();
         $$(".router-link").findBy(text("Web Tables")).click();
         $("#addNewRecordButton").click();
         $("#firstName").setValue(firstName);
-        $("#age").setValue(badAge);
-        $("#salary").setValue(badSalary);
-        $("#department").setValue(badDepartament);
+        $("#age").setValue("33");
+        $("#salary").setValue("33");
+        $("#department").setValue("dep");
         $("#submit").click();
 
         $("#registration-form-modal").shouldBe(visible);

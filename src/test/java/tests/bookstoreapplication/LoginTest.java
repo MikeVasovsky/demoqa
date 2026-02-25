@@ -12,16 +12,12 @@ import static tests.testdata.TestData.*;
 public class LoginTest extends TestBase {
 
     @Test
-    void errorIfUserNotRegisteredTest() {
+    void errorIfUserNotRegistered() {
         open("");
-        executeJavaScript("""
-                document.getElementById('fixedban')?.remove();
-                document.querySelector('footer')?.remove();
-                """);
         $$(".card-body").findBy(text("Book Store Application")).click();
         $$(".router-link").findBy(text("Login")).click();
-        $("#userName").sendKeys(badLogin);
-        $("#password").sendKeys(badPassword);
+        $("#userName").sendKeys("1");
+        $("#password").sendKeys("1");
         $("#login").click();
 
         assertEquals("Invalid username or password!",
@@ -29,13 +25,9 @@ public class LoginTest extends TestBase {
     }
 
     @Test
-    void errorIfUserDontVerifyReCaptchaToRegisterTest() {
+    void errorIfUserDontVerifyReCaptchaToRegister() {
         String expectedMessage = "Please verify reCaptcha to register!";
         open("");
-        executeJavaScript("""
-                document.getElementById('fixedban')?.remove();
-                document.querySelector('footer')?.remove();
-                """);
         $$(".card-body").findBy(text("Book Store Application")).click();
         $$(".router-link").findBy(text("Login")).click();
         $("#newUser").click();
