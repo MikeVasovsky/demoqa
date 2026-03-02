@@ -3,8 +3,9 @@ package tests.form;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 import tests.pages.PracticeFormPage;
+import tests.testdata.UserTestData;
 
-import static tests.testdata.TestData.*;
+import static tests.testdata.UserFactory.createUser;
 
 public class PracticeFormTest extends TestBase {
 
@@ -12,29 +13,32 @@ public class PracticeFormTest extends TestBase {
 
     @Test
     void correctRegistrationTest() {
+        UserTestData u = createUser();
         practiceFormPage.openPage()
                 .removeBanner()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
-                .setNumber(userNumber)
-                .setGender(sex)
-                .setDateOfBirth(day, month, year)
-                .setSubject(subject)
-                .setHobbie(hobbies)
-                .uploadPicture(pictureName)
-                .setCurrentAddress(currentAddress)
-                .setStateAndCity(state, city)
+                .setFirstName(u.getFirstName())
+                .setLastName(u.getLastName())
+                .setEmail(u.getEmail())
+                .setNumber(u.getPhoneNumber())
+                .setGender(u.getGender())
+                .setDateOfBirth(u.getBirthDay(),
+                        u.getBirthMonth(),
+                        u.getBirthYear())
+                .setSubject(u.getSubject())
+                .setHobbie(u.getHobbie())
+                .uploadPicture(u.getPictureName())
+                .setCurrentAddress(u.getCurrentAddress())
+                .setStateAndCity(u.getState(), u.getCity())
                 .clickSubmitBtn()
-                .checkResult("Student Name", firstName + " " + lastName)
-                .checkResult("Student Email", userEmail)
-                .checkResult("Gender", sex)
-                .checkResult("Mobile", userNumber)
-                .checkResult("Date of Birth", resultDay + " " + month + "," + year)
-                .checkResult("Subjects", subject)
-                .checkResult("Hobbies", hobbies)
-                .checkResult("Picture", pictureName)
-                .checkResult("Address", currentAddress)
-                .checkResult("State and City", state + " " + city);
+                .checkResult("Student Name", (u.getFirstName() + " " + u.getLastName()))
+                .checkResult("Student Email", u.getEmail())
+                .checkResult("Gender", u.getGender())
+                .checkResult("Mobile", u.getPhoneNumber())
+                .checkResult("Date of Birth", u.getBirthDay() + " " + u.getBirthMonth() + "," + u.getBirthYear())
+                .checkResult("Subjects", u.getSubject())
+                .checkResult("Hobbies", u.getHobbie())
+                .checkResult("Picture", u.getPictureName())
+                .checkResult("Address", u.getCurrentAddress())
+                .checkResult("State and City", u.getState() + " " + u.getCity());
     }
 }

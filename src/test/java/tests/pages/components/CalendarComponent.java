@@ -10,9 +10,10 @@ public class CalendarComponent {
     private SelenideElement monthInput = $(".react-datepicker__month-select");
     private SelenideElement yearInput = $(".react-datepicker__year-select");
 
-    public void setDate(String day, String month, String year) {
+    public void setDate(Integer day, String month, String year) {
+        String result = (day<10)?"00"+day:"0"+day;
         yearInput.$(byText(year)).click();
         monthInput.$(byText(month)).click();
-        $(".react-datepicker__day--" + day + ":not(.react-datepicker__day--outside-month)").click();
+        $(".react-datepicker__day--" + result + ":not(.react-datepicker__day--outside-month)").click();
     }
 }

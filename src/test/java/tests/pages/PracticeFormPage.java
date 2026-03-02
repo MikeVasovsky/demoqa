@@ -67,7 +67,7 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage setDateOfBirth(String day, String month, String year) {
+    public PracticeFormPage setDateOfBirth(Integer day, String month, String year) {
         dateInput.click();
         calendarComponent.setDate(day, month, year);
         return this;
