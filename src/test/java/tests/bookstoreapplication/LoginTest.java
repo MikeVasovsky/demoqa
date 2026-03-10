@@ -3,7 +3,6 @@ package tests.bookstoreapplication;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 import tests.pages.LoginPage;
-import tests.testdata.LoginFactory;
 import tests.testdata.LoginTestData;
 
 
@@ -14,7 +13,7 @@ public class LoginTest extends TestBase {
 
     @Test
     void errorIfUserNotRegisteredTest() {
-        LoginTestData l = LoginFactory.createLoginData();
+        LoginTestData l = new LoginTestData();
         loginPage
                 .openPage()
                 .removeBanner()

@@ -1,5 +1,8 @@
 package tests.testdata;
 
+import lombok.Data;
+
+@Data
 public class UserTestData {
     private String firstName;
     private String lastName;
@@ -15,8 +18,6 @@ public class UserTestData {
     private String subject;
     private String state;
     private String city;
-
-
     public UserTestData(String firstName,
                         String lastName,
                         String phoneNumber,
@@ -47,59 +48,4 @@ public class UserTestData {
         this.city = city;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public Integer getBirthDay() {
-        return birthDay;
-    }
-
-    public String getBirthMonth() {
-        return birthMonth;
-    }
-
-    public String getBirthYear() {
-        return birthYear;
-    }
-
-    public String getHobbie() {
-        return hobbie;
-    }
-
-    public String getCurrentAddress() {
-        return currentAddress;
-    }
-
-    public String getPictureName() {
-        return pictureName;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getCity() {
-        return city;
-    }
 }

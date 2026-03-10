@@ -6,34 +6,14 @@ import static tests.utils.FakerProvider.getFakerEn;
 
 public class UserFactory {
 
-    private static String[] genders = {"Male", "Female", "Other"};
-    private static String[] hobbies = {"Sports", "Reading", "Music"};
-    private static String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    private static String[] subjects = {"Arts", "Economics", "Civics"};
-    private static String[] states = {"NCR", "Haryana"};
-    private static String[] citysOfNcr = {"Delhi", "Gurgaon", "Noida"};
-    private static String[] citysOfHaryana = {"Karnal", "Panipat"};
-
-
     public static UserTestData createUser() {
+        TestData t = new TestData();
         String state = getRandomState();
         String city = getRandomCity(state);
 
         return new UserTestData(
-                getFaker().name().firstName(),
-                getFaker().name().lastName(),
-                getFaker().numerify("##########"),
-                getFakerEn().internet().emailAddress(),
-                getRandomGender(),
-                getRandomDay(),
-                getRandomMonth(),
-                getFaker().random().nextInt(1950, 2026).toString(),
-                getRandomHobbie(),
-                getFaker().address().toString(),
-                pictureName,
-                getRandomSubject(),
-                state,
-                city
+                t.getFirstName(),
+
         );
     }
 

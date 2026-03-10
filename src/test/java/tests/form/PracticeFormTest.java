@@ -14,6 +14,7 @@ public class PracticeFormTest extends TestBase {
     @Test
     void correctRegistrationTest() {
         UserTestData u = createUser();
+
         practiceFormPage.openPage()
                 .removeBanner()
                 .setFirstName(u.getFirstName())
