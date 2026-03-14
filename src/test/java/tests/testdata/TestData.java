@@ -1,14 +1,9 @@
 package tests.testdata;
 
 import com.github.javafaker.Faker;
-import lombok.Data;
 
-import java.util.Locale;
-
-@Data
 public class TestData {
     public Faker f = new Faker();
-    public Faker fRu = new Faker(new Locale("ru"));
 
     public String firstName = f.name().firstName();
     public String lastName = f.name().lastName();
@@ -16,31 +11,39 @@ public class TestData {
     public String badUserEmail = userEmail.replace("@", "");
     public String currentAddress = f.address().fullAddress();
     public String permanentAddress = f.address().secondaryAddress();
-
+    public String phoneNumber = f.phoneNumber().subscriberNumber(10);
+    public String gender = f.options().option(genders);
+    public int day = f.random().nextInt(1, 28);
+    public String month = f.options().option(months);
+    public String year = f.random().nextInt(1950, 2025).toString();
+    public String hobbie = f.options().option(hobbies);
+    public String subject = f.options().option(subjects);
+    public String state = f.options().option(states);
+    public String city = getRandomCity(state);
 
     public String pictureName = "sample-clouds-400x300.jpg";
 
-    public String username = "Username!?";
+    public String username = f.name().username();
+    public String password = f.internet().password(8, 12);
 
-    public String age = "22";
     public String salary = "20";
     public String departament = "dp";
 
-    public static String[] expectedResultValues = {
+    public String[] expectedResultValues = {
             username,
             badUserEmail,
             currentAddress,
             permanentAddress
     };
 
-    public static String[] expectedResultInWebTable = {
-            firstName,
-            lastName,
-            age,
-            userEmail,
-            salary,
-            departament
-    };
+    public String getRandomCity(String state) {
+        return switch (state) {
+            case "NCR" -> city = f.options().option(citysOfNcr);
+
+            case "Haryana" -> city = f.options().option(citysOfHaryana);
+            default -> null;
+        };
+    }
 
     private static String[] genders = {"Male", "Female", "Other"};
     private static String[] hobbies = {"Sports", "Reading", "Music"};
