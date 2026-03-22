@@ -25,7 +25,7 @@ public class MainPageTest extends TestBase {
             "English; The free, fun, and effective way to learn a language!",
             "Deutsch; Effektiv und kostenlos eine Sprache lernen – und dabei Spaß haben!",
     }, delimiter = ';')
-    public void getLan(String l, String result) {
+    public void greetengsElementShouldChangeLanguageThenLanguageIsChanges(String l, String result) {
         mainPage.changeLanguage(l);
         assertEquals(result, mainPage.getTextFromGreetingsTitle());
     }
