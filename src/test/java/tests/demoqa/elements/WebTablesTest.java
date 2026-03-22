@@ -1,9 +1,9 @@
-package tests.elements;
+package tests.demoqa.elements;
 
 import org.junit.jupiter.api.Test;
-import tests.TestBase;
-import tests.pages.WebTablesPage;
-import tests.testdata.TestData;
+import tests.demoqa.TestBase;
+import tests.demoqa.pages.WebTablesPage;
+import tests.demoqa.testdata.TestData;
 
 public class WebTablesTest extends TestBase {
 

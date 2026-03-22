@@ -1,9 +1,9 @@
-package tests.form;
+package tests.demoqa.form;
 
 import org.junit.jupiter.api.Test;
-import tests.TestBase;
-import tests.pages.PracticeFormPage;
-import tests.testdata.TestData;
+import tests.demoqa.TestBase;
+import tests.demoqa.pages.PracticeFormPage;
+import tests.demoqa.testdata.TestData;
 
 public class PracticeFormTest extends TestBase {
 

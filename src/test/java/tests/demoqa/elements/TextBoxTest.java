@@ -1,9 +1,9 @@
-package tests.elements;
+package tests.demoqa.elements;
 
 import org.junit.jupiter.api.Test;
-import tests.TestBase;
-import tests.pages.TextBoxPage;
-import tests.testdata.TestData;
+import tests.demoqa.TestBase;
+import tests.demoqa.pages.TextBoxPage;
+import tests.demoqa.testdata.TestData;
 
 public class TextBoxTest extends TestBase {
 

@@ -1,4 +1,4 @@
-package tests;
+package tests.duolingo;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
@@ -10,7 +10,7 @@ public class TestBase {
     @BeforeAll
     static void setUp() {
         Configuration.browserSize = "2560x1440";
-        Configuration.baseUrl = "https://demoqa.com/";
+        Configuration.baseUrl = "https://ko.duolingo.com/";
         Configuration.pageLoadStrategy = "eager";
     }
 

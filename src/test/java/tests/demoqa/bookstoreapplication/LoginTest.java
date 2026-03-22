@@ -1,9 +1,9 @@
-package tests.bookstoreapplication;
+package tests.demoqa.bookstoreapplication;
 
 import org.junit.jupiter.api.Test;
-import tests.TestBase;
-import tests.pages.LoginPage;
-import tests.testdata.TestData;
+import tests.demoqa.TestBase;
+import tests.demoqa.pages.LoginPage;
+import tests.demoqa.testdata.TestData;
 
 
 public class LoginTest extends TestBase {

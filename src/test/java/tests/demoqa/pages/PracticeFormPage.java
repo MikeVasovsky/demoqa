@@ -1,8 +1,8 @@
-package tests.pages;
+package tests.demoqa.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import tests.pages.components.CalendarComponent;
-import tests.pages.components.TableResultComponent;
+import tests.demoqa.pages.components.CalendarComponent;
+import tests.demoqa.pages.components.TableResultComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
