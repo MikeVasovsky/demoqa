@@ -9,9 +9,10 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 public class TestBase {
     @BeforeAll
     static void setUp() {
-        Configuration.browserSize = "2560x1440";
+        Configuration.browserSize = "1980x1080";
         Configuration.baseUrl = "https://ko.duolingo.com/";
         Configuration.pageLoadStrategy = "eager";
+        Configuration.timeout = 1000;
     }
 
     @AfterEach

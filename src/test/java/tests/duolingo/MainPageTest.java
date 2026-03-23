@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EnumSource;
+import tests.duolingo.pages.LearnLanguages;
 import tests.duolingo.pages.MainPage;
 
 import static com.codeborne.selenide.Configuration.baseUrl;
@@ -26,7 +28,18 @@ public class MainPageTest extends TestBase {
             "Deutsch; Effektiv und kostenlos eine Sprache lernen – und dabei Spaß haben!",
     }, delimiter = ';')
     public void greetengsElementShouldChangeLanguageThenLanguageIsChanges(String l, String result) {
-        mainPage.changeLanguage(l);
+        mainPage.changeSiteLanguage(l);
         assertEquals(result, mainPage.getTextFromGreetingsTitle());
+    }
+
+    @ParameterizedTest
+    @DisplayName("Проверка выбора изучаемого языка")
+    @EnumSource(LearnLanguages.class)
+    void checkMessageThenChooseLearnLanguage(LearnLanguages l) {
+        mainPage.changeSiteLanguage("русский")
+                .acceptCookie()
+                .changeLearnLanguage(l.getLanguage());
+        assertEquals(l.getDesc(), mainPage.getTextFromGreetingsTitle());
+
     }
 }
