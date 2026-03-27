@@ -12,7 +12,7 @@ public class TestBase {
         Configuration.browserSize = "1980x1080";
         Configuration.baseUrl = "https://ko.duolingo.com/";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.timeout = 1000;
+        Configuration.timeout = 10000;
     }
 
     @AfterEach

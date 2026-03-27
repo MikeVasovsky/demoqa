@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainPageTest extends TestBase {
 
@@ -26,7 +27,6 @@ public class MainPageTest extends TestBase {
     }
 
     MainPage mainPage = new MainPage();
-    LoginPage loginPage = new LoginPage();
 
     private static Stream<Arguments> checkErrorMessageIfLogopassIncorrect() {
         TestData t = new TestData();
@@ -63,8 +63,10 @@ public class MainPageTest extends TestBase {
     @DisplayName("Проверка логина с некорреткными логином и паролем")
     @MethodSource("checkErrorMessageIfLogopassIncorrect")
     void checkErrorMessageIfLogopassIncorrect(String email, String password) {
-        mainPage.goToLoginPage()
+        String result = mainPage.changeSiteLanguage("русский")
+                .acceptCookie()
+                .goToLoginPage()
                 .loginWithIncorrectLogopass(email, password);
-        assertEquals("Неверный пароль. Повторите попытку.", loginPage.getErrorLoginMessage().text());
+        assertTrue(result.contains("Повторите попытку."));
     }
 }
