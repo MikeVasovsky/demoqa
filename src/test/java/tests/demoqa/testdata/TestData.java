@@ -5,6 +5,10 @@ import com.github.javafaker.Faker;
 public class TestData {
     public Faker f = new Faker();
 
+    public Faker getF() {
+        return f;
+    }
+
     public String firstName = f.name().firstName();
     public String lastName = f.name().lastName();
     public String userEmail = f.internet().emailAddress();

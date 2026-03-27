@@ -3,10 +3,16 @@ package tests.duolingo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import tests.demoqa.testdata.TestData;
 import tests.duolingo.pages.LearnLanguages;
+import tests.duolingo.pages.LoginPage;
 import tests.duolingo.pages.MainPage;
+
+import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.open;
@@ -20,6 +26,16 @@ public class MainPageTest extends TestBase {
     }
 
     MainPage mainPage = new MainPage();
+    LoginPage loginPage = new LoginPage();
+
+    private static Stream<Arguments> checkErrorMessageIfLogopassIncorrect() {
+        TestData t = new TestData();
+        return Stream.of(
+                Arguments.of(t.getF().internet().emailAddress(), t.getF().internet().password()),
+                Arguments.of(t.getF().internet().emailAddress(), t.getF().internet().password()),
+                Arguments.of(t.getF().internet().emailAddress(), t.getF().internet().password())
+        );
+    }
 
     @ParameterizedTest
     @DisplayName("Проверка изменения приветственного сообщения, при изменении языка сайта")
@@ -41,5 +57,14 @@ public class MainPageTest extends TestBase {
                 .changeLearnLanguage(l.getLanguage());
         assertEquals(l.getDesc(), mainPage.getTextFromGreetingsTitle());
 
+    }
+
+    @ParameterizedTest
+    @DisplayName("Проверка логина с некорреткными логином и паролем")
+    @MethodSource("checkErrorMessageIfLogopassIncorrect")
+    void checkErrorMessageIfLogopassIncorrect(String email, String password) {
+        mainPage.goToLoginPage()
+                .loginWithIncorrectLogopass(email, password);
+        assertEquals("Неверный пароль. Повторите попытку.", loginPage.getErrorLoginMessage().text());
     }
 }

@@ -12,6 +12,7 @@ public class MainPage {
     private ElementsCollection learnLanguages = $$("._1nZQi");
     private SelenideElement greetingsTitle = $(".L93Ok");
     private SelenideElement acceptCookies = $x("//button[contains(text(),'ACCEPT COOKIES')]");
+    private SelenideElement iHaveAccountBtn = $("[data-test='have-account']");
     LanguageTittle languageTittle = new LanguageTittle();
 
 
@@ -32,6 +33,11 @@ public class MainPage {
         acceptCookies.click();
         }
         return this;
+    }
+
+    public LoginPage goToLoginPage(){
+        iHaveAccountBtn.click();
+        return new LoginPage();
     }
 
     public String getTextFromGreetingsTitle() {
