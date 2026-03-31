@@ -1,4 +1,4 @@
-package tests.pages;
+package tests.demoqa.pages;
 
 import com.codeborne.selenide.SelenideElement;
 
@@ -39,11 +39,6 @@ public class WebTablesPage {
         return this;
     }
 
-    public WebTablesPage setEmail(String value) {
-        emailInput.setValue(value);
-        return this;
-    }
-
     public WebTablesPage setLastname(String value) {
         lastnameInput.setValue(value);
         return this;
@@ -72,12 +67,6 @@ public class WebTablesPage {
     public WebTablesPage clickAddRecordBtn() {
         addRecordBtn.click();
         return this;
-    }
-
-    public void checkWebTableHaveValue(String... value) {
-        for (String s : value) {
-            resultFld.shouldHave(text(s));
-        }
     }
 
     public void registrationFormShouldBeVisible() {

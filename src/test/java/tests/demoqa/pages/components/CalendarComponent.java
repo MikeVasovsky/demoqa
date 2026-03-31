@@ -1,4 +1,4 @@
-package tests.pages.components;
+package tests.demoqa.pages.components;
 
 import com.codeborne.selenide.SelenideElement;
 

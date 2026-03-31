@@ -1,9 +1,13 @@
-package tests.testdata;
+package tests.demoqa.testdata;
 
 import com.github.javafaker.Faker;
 
 public class TestData {
     public Faker f = new Faker();
+
+    public Faker getF() {
+        return f;
+    }
 
     public String firstName = f.name().firstName();
     public String lastName = f.name().lastName();
