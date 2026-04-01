@@ -2,11 +2,14 @@ package tests.filestest;
 
 import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tests.model.MenuJson;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -26,6 +29,7 @@ public class FilesTest {
         )) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
+                assertTrue(entry.getSize() != 0);
                 String fileName = entry.getName();
                 if (fileName.endsWith(".pdf")) {
                     PDF pdf = new PDF(zis);
@@ -45,6 +49,16 @@ public class FilesTest {
                 }
             }
         }
+    }
+
+    @Test
+    void getTextFromJson() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File("src/test/resources/json_data.json.txt");
+        MenuJson menuJson = objectMapper.readValue(file, MenuJson.class);
+        assertEquals("File", menuJson.getMenu().getValue());
+        assertEquals("Close", menuJson.getMenu().getPopup().getMenuitem().get(2).getValue());
+        assertEquals("CreateNewDoc()", menuJson.getMenu().getPopup().getMenuitem().get(0).getOnclick());
     }
 }
 
