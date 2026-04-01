@@ -52,6 +52,7 @@ public class FilesTest {
     }
 
     @Test
+    @DisplayName("Чтение и проверка файлов из json файла")
     void getTextFromJson() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File("src/test/resources/json_data.json.txt");
