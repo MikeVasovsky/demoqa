@@ -51,7 +51,6 @@ public class FilesTest {
                     List<String[]> strings = csvReader.readAll();
                     assertEquals(38, strings.size());
                     assertArrayEquals(new String[]{"name", "phoneNumber", "email", "address", "userAgent", "hexcolor"}, strings.get(0));
-                    break;
                 }
             }
         }
