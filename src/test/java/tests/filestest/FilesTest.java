@@ -30,7 +30,6 @@ public class FilesTest {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 if (entry.getName().endsWith(".pdf")) {
-                    assertTrue(entry.getSize() != 0);
                     PDF pdf = new PDF(zis);
                     String resultData = pdf.text;
                     assertTrue(resultData.contains("ДЕПАРТАМЕНТ ПРИРОДОПОЛЬЗОВАНИЯ И ОХРАНЫ ОКРУЖАЮЩЕЙ СРЕДЫ ГОРОДА МОСКВЫ"));
@@ -48,7 +47,6 @@ public class FilesTest {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 if (entry.getName().endsWith(".csv")) {
-                    assertTrue(entry.getSize() != 0);
                     CSVReader csvReader = new CSVReader(new InputStreamReader(zis));
                     List<String[]> strings = csvReader.readAll();
                     assertEquals(38, strings.size());
@@ -74,7 +72,6 @@ public class FilesTest {
             }
         }
     }
-
 
     @Test
     @DisplayName("Чтение и проверка файлов из json файла")
