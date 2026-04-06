@@ -25,10 +25,12 @@ public class FilesTest {
     @DisplayName("Чтение и проверка PDF файла из архива")
     void readAndCheckDataFromPdfFileInZipArchive() throws IOException {
         try (ZipInputStream zis = new ZipInputStream(
-                cl.getResourceAsStream("files1.zip")
+                cl.getResourceAsStream("filesEmpty.zip")
         )) {
             ZipEntry entry;
+
             while ((entry = zis.getNextEntry()) != null) {
+                assertTrue(entry.getSize()>0);
                 if (entry.getName().endsWith(".pdf")) {
                     PDF pdf = new PDF(zis);
                     String resultData = pdf.text;
@@ -46,6 +48,7 @@ public class FilesTest {
         )) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
+                assertTrue(entry.getSize()>0);
                 if (entry.getName().endsWith(".csv")) {
                     CSVReader csvReader = new CSVReader(new InputStreamReader(zis));
                     List<String[]> strings = csvReader.readAll();
@@ -63,6 +66,7 @@ public class FilesTest {
                 cl.getResourceAsStream("files1.zip"))) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
+                assertTrue(entry.getSize()>0);
                 if (entry.getName().endsWith(".xlsx")) {
                     XLS xls = new XLS(zis);
                     String res = xls.excel.getSheetAt(0).getRow(4).getCell(0).getStringCellValue();
