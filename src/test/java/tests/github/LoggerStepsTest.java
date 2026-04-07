@@ -9,10 +9,9 @@ import tests.github.pages.RepositoriesSearchPage;
 import tests.github.pages.RepositoryPage;
 import tests.github.pages.StartPage;
 
-import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.logevents.SelenideLogger.step;
 
-public class StepsTest extends TestBase {
+public class LoggerStepsTest extends TestBase {
     StartPage sp = new StartPage();
     RepositoriesSearchPage rsp = new RepositoriesSearchPage();
     RepositoryPage rp = new RepositoryPage();
