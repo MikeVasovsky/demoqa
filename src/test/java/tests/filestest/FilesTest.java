@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import tests.model.MenuJson;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -36,10 +37,13 @@ public class FilesTest {
                     String resultData = pdf.text;
                     assertTrue(resultData.contains(
                             "ДЕПАРТАМЕНТ ПРИРОДОПОЛЬЗОВАНИЯ И ОХРАНЫ ОКРУЖАЮЩЕЙ СРЕДЫ ГОРОДА МОСКВЫ"));
+                    break;
                 }
             }
         }
-        assertTrue(fileFound, "Файл с расширением .pdf не найден");
+        if (!fileFound) {
+            throw new FileNotFoundException("Файл с расширением .pdf не найден");
+        }
     }
 
     @Test
@@ -47,7 +51,7 @@ public class FilesTest {
     void readAndCheckDataFromCsvFileInZipArchive() throws IOException, CsvException {
         boolean fileFound = false;
         try (ZipInputStream zis = new ZipInputStream(
-                cl.getResourceAsStream("file1.zip")
+                cl.getResourceAsStream("files1.zip")
         )) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
@@ -56,10 +60,14 @@ public class FilesTest {
                     CSVReader csvReader = new CSVReader(new InputStreamReader(zis));
                     List<String[]> strings = csvReader.readAll();
                     assertEquals(38, strings.size());
-                    assertArrayEquals(new String[]{"name", "phoneNumber", "email", "address", "userAgent", "hexcolor"}, strings.get(0));
+                    assertArrayEquals(new String[]{
+                            "name", "phoneNumber", "email", "address", "userAgent", "hexcolor"}, strings.get(0));
+                    break;
                 }
             }
-            assertTrue(fileFound, "Файл с расширением .csv не найден");
+        }
+        if (!fileFound) {
+            throw new FileNotFoundException("Файл с расширением .csv не найден");
         }
     }
 
@@ -76,9 +84,12 @@ public class FilesTest {
                     XLS xls = new XLS(zis);
                     String res = xls.excel.getSheetAt(0).getRow(4).getCell(0).getStringCellValue();
                     assertEquals("00127/26", res);
+                    break;
                 }
             }
-            assertTrue(fileFound, "Файл с расширением .xlsx не найден");
+        }
+        if (!fileFound) {
+            throw new FileNotFoundException("Файл с расширением .xlsx не найден");
         }
     }
 
