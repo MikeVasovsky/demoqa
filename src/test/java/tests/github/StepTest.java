@@ -1,7 +1,10 @@
 package tests.github;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -53,6 +56,9 @@ public class StepTest {
     }
 
     @Test
+    @Feature("Issue в репозитории")
+    @Story("Нахождение issue")
+    @Owner("ikrylov")
     @DisplayName("Проверка issue через steps")
     void checkIssueNameByText() {
         openPage();
