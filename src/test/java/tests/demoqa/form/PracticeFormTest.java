@@ -1,6 +1,5 @@
 package tests.demoqa.form;
 
-
 import org.junit.jupiter.api.Test;
 import tests.demoqa.TestBase;
 import tests.demoqa.pages.PracticeFormPage;

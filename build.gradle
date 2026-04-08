@@ -1,19 +1,17 @@
 plugins {
     id 'java-library'
-    id("io.qameta.allure") version "3.1.0"
-
+    id 'io.qameta.allure' version '3.1.0'
 }
 
-
 allure {
-    report{
-        version.set("2.20.0")
+    report {
+        version = '2.20.0'
     }
-    adapter{
-        aspectjWeaver.set(true)
-        frameworks{
-            junit5{
-                adapterVersion.set("2.20.0")
+    adapter {
+        aspectjWeaver = true
+        frameworks {
+            junit5 {
+                adapterVersion = '2.20.0'
             }
         }
     }
@@ -37,6 +35,6 @@ dependencies {
     )
 }
 
-tasks.test {
+test {
     useJUnitPlatform()
 }
