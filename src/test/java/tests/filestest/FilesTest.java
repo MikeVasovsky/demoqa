@@ -7,7 +7,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import tests.model.MenuJson;
+import tests.filestest.model.MenuJson;
 
 import java.io.File;
 import java.io.FileNotFoundException;

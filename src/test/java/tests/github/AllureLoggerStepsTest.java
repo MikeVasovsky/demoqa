@@ -11,7 +11,7 @@ import tests.github.pages.StartPage;
 
 import static com.codeborne.selenide.logevents.SelenideLogger.step;
 
-public class LoggerStepsTest extends TestBase {
+public class AllureLoggerStepsTest extends TestBase {
     StartPage sp = new StartPage();
     RepositoriesSearchPage rsp = new RepositoriesSearchPage();
     RepositoryPage rp = new RepositoryPage();
@@ -20,18 +20,13 @@ public class LoggerStepsTest extends TestBase {
     @DisplayName("Проверка issue по тексту с шагами через лямбды")
     void checkIssueNameByText() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        step("Найти репозиторий", () -> {
-            sp.searchRepo("MikeVasovsky/demoqa");
-        });
-        step("Выбрать репозиторий", () -> {
-            rsp.chooseRepository("MikeVasovsky/demoqa");
-        });
-        step("Кликнуть на раздел issue", () -> {
-            rp.clickIssueTab();
-        });
-        step("Найти issue и проверить его название", () -> {
-            rp.findIssueByName("issue for allure homework");
-
-        });
+        step("Найти репозиторий", () ->
+            sp.searchRepo("MikeVasovsky/demoqa"));
+        step("Выбрать репозиторий", () ->
+            rsp.chooseRepository("MikeVasovsky/demoqa"));
+        step("Кликнуть на раздел issue", () ->
+            rp.clickIssueTab());
+        step("Найти issue и проверить его название", () ->
+                rp.findIssueByName("issue for allure homework"));
     }
 }
