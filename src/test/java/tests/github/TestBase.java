@@ -26,9 +26,8 @@ public class TestBase {
     @BeforeEach
     public void openPage() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        step("Открываем страницу github", ()->{
-            open(baseUrl);
-        });
+        step("Открываем страницу github", () ->
+                open(baseUrl));
     }
 
     @AfterEach

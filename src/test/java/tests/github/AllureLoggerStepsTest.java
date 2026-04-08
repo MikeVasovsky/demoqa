@@ -1,11 +1,9 @@
 package tests.github;
 
 
-import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.github.pages.RepositoriesSearchPage;
@@ -25,13 +23,12 @@ public class AllureLoggerStepsTest extends TestBase {
     @Owner("ikrylov")
     @DisplayName("Проверка issue по тексту с шагами через лямбды")
     void checkIssueNameByText() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         step("Найти репозиторий", () ->
-            sp.searchRepo("MikeVasovsky/demoqa"));
+                sp.searchRepo("MikeVasovsky/demoqa"));
         step("Выбрать репозиторий", () ->
-            rsp.chooseRepository("MikeVasovsky/demoqa"));
+                rsp.chooseRepository("MikeVasovsky/demoqa"));
         step("Кликнуть на раздел issue", () ->
-            rp.clickIssueTab());
+                rp.clickIssueTab());
         step("Найти issue и проверить его название", () ->
                 rp.findIssueByName("issue for allure homework"));
     }
