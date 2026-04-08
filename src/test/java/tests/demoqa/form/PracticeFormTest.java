@@ -1,7 +1,5 @@
 package tests.demoqa.form;
 
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
 import tests.demoqa.TestBase;
 import tests.demoqa.pages.PracticeFormPage;
@@ -14,7 +12,6 @@ public class PracticeFormTest extends TestBase {
 
     @Test
     void correctRegistrationTest() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
         practiceFormPage.openPage()
                 .removeBanner()
                 .setFirstName(t.firstName)
