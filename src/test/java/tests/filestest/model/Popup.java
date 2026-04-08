@@ -1,4 +1,4 @@
-package tests.model;
+package tests.filestest.model;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
