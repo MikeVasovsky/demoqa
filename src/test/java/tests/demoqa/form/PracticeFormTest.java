@@ -15,8 +15,8 @@ public class PracticeFormTest extends TestBase {
     @Test
     void correctRegistrationTest() {
         step("открыть страницу https://demoqa.com/", () ->
-                practiceFormPage.openPage())
-                .removeBanner();
+                practiceFormPage.openPage()
+                        .removeBanner());
         step("ввести тестовые данные", () ->
                 practiceFormPage.setFirstName(t.firstName)
                         .setLastName(t.lastName)
