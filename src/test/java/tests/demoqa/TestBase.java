@@ -1,6 +1,7 @@
 package tests.demoqa;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -9,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeOptions;
 import tests.helpers.Attach;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static io.qameta.allure.Allure.step;
 
 public class TestBase {
     @BeforeAll
@@ -32,11 +33,13 @@ public class TestBase {
 
     @AfterEach
     void afterTest() {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
+        step("приложить вложения", () -> {
+            Attach.screenshotAs("Last screenshot");
+            Attach.pageSource();
+            Attach.browserConsoleLogs();
+            Attach.addVideo();
 //        Attach.attachAsText("Some file", "Some content");
-        closeWebDriver();
+        });
+        step("закрыть браузер", Selenide::closeWebDriver);
     }
 }
