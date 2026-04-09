@@ -35,6 +35,12 @@ dependencies {
     )
 }
 
-test {
+tasks.withType(Test) {
     useJUnitPlatform()
+    testLogging() {
+        lifecycle {
+            events "started", "skipped", "failed", "STANDARD_ERROR", "STANDARD_OUT"
+            exceptionFormat "short"
+        }
+    }
 }
