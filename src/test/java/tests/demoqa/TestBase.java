@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import tests.helpers.Attach;
 
 import static io.qameta.allure.Allure.step;
+import static java.lang.Boolean.parseBoolean;
 
 public class TestBase {
     @BeforeAll
@@ -23,6 +24,7 @@ public class TestBase {
         Configuration.pageLoadStrategy = "eager";
         Configuration.browserVersion = System.getProperty("brVersion");
         Configuration.remote = System.getProperty("remote");
+        Configuration.headless = parseBoolean(System.getProperty("headless"));
         Configuration.browserCapabilities = options;
     }
 
