@@ -21,7 +21,7 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("brSize");
         Configuration.baseUrl = System.getProperty("baseUrl");
         Configuration.pageLoadStrategy = "eager";
-        Configuration.browserVersion = "128";
+        Configuration.browserVersion = System.getProperty("brVersion");
         Configuration.remote = System.getProperty("remote");
         Configuration.browserCapabilities = options;
     }
