@@ -37,6 +37,7 @@ dependencies {
 
 tasks.withType(Test) {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
     testLogging() {
         lifecycle {
             events "started", "skipped", "failed", "STANDARD_ERROR", "STANDARD_OUT"

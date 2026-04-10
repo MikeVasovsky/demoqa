@@ -18,11 +18,11 @@ public class TestBase {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        Configuration.browserSize = "2560x1440";
-        Configuration.baseUrl = "https://demoqa.com/";
+        Configuration.browserSize = System.getProperty("brSize");
+        Configuration.baseUrl = System.getProperty("baseUrl");
         Configuration.pageLoadStrategy = "eager";
         Configuration.browserVersion = "128";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = System.getProperty("remote");
         Configuration.browserCapabilities = options;
     }
 
