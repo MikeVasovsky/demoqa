@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import tests.helpers.Attach;
 
 import static io.qameta.allure.Allure.step;
+import static java.lang.Boolean.parseBoolean;
 
 public class TestBase {
     @BeforeAll
@@ -18,11 +19,12 @@ public class TestBase {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        Configuration.browserSize = "2560x1440";
-        Configuration.baseUrl = "https://demoqa.com/";
+        Configuration.browserSize = System.getProperty("brSize");
+        Configuration.baseUrl = System.getProperty("baseUrl");
         Configuration.pageLoadStrategy = "eager";
-        Configuration.browserVersion = "128";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.browserVersion = System.getProperty("brVersion");
+        Configuration.remote = System.getProperty("remote");
+        Configuration.headless = parseBoolean(System.getProperty("headless"));
         Configuration.browserCapabilities = options;
     }
 
