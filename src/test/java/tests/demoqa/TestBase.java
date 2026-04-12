@@ -21,11 +21,12 @@ public class TestBase {
         options.addArguments("--disable-dev-shm-usage");
         Configuration.browserSize = System.getProperty("brSize");
         Configuration.baseUrl = System.getProperty("baseUrl");
-        Configuration.pageLoadStrategy = "eager";
         Configuration.browserVersion = System.getProperty("brVersion");
         Configuration.remote = System.getProperty("remote");
         Configuration.headless = parseBoolean(System.getProperty("headless"));
+        Configuration.pageLoadStrategy = "eager";
         Configuration.browserCapabilities = options;
+
     }
 
     @BeforeEach
