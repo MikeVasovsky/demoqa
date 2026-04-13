@@ -22,14 +22,14 @@
           "properties": {
             "127.0": {
               "type": "object",
-              "additionalProperties": false
+              "additionalProperties": true
             },
             "128.0": {
               "type": "object",
-              "additionalProperties": false
+              "additionalProperties": true
             }
           },
-          "additionalProperties": false,
+          "additionalProperties": true,
           "required": [
             "127.0",
             "128.0"
@@ -40,14 +40,14 @@
           "properties": {
             "124.0": {
               "type": "object",
-              "additionalProperties": false
+              "additionalProperties": true
             },
             "125.0": {
               "type": "object",
-              "additionalProperties": false
+              "additionalProperties": true
             }
           },
-          "additionalProperties": false,
+          "additionalProperties": true,
           "required": [
             "124.0",
             "125.0"
@@ -58,21 +58,21 @@
           "properties": {
             "108.0": {
               "type": "object",
-              "additionalProperties": false
+              "additionalProperties": true
             },
             "109.0": {
               "type": "object",
-              "additionalProperties": false
+              "additionalProperties": true
             }
           },
-          "additionalProperties": false,
+          "additionalProperties": true,
           "required": [
             "108.0",
             "109.0"
           ]
         }
       },
-      "additionalProperties": false,
+      "additionalProperties": true,
       "required": [
         "chrome",
         "firefox",
@@ -80,7 +80,7 @@
       ]
     }
   },
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": [
     "total",
     "used",
