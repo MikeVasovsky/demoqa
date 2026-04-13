@@ -9,4 +9,6 @@ public class BaseTest {
     public static void beforeAll(){
         RestAssured.baseURI = "https://selenoid.autotests.cloud";
     }
+
+
 }
