@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'io.qameta.allure' version '3.1.0'
+    id 'io.freefair.lombok' version "9.2.0"
 }
 
 allure {
@@ -33,7 +34,9 @@ dependencies {
             'org.junit.platform:junit-platform-launcher',
             "io.qameta.allure:allure-selenide:2.33.0",
             "io.rest-assured:rest-assured:6.0.0",
-            "io.rest-assured:json-schema-validator:6.0.0"
+            "io.rest-assured:json-schema-validator:6.0.0",
+            "org.projectlombok:lombok:1.18.44",
+            "org.assertj:assertj-core:3.27.7"
 
     )
 }
