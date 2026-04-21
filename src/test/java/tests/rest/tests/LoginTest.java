@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import tests.rest.BaseTest;
 import tests.rest.models.login.*;
 
-import static java.util.Arrays.stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static tests.rest.data.TestData.*;
 
@@ -30,14 +29,13 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Проверка ответа 400 при авторизации без пароля")
     void passwordAbsenceTest() {
         LoginBodyWithoutPassword data = new LoginBodyWithoutPassword(LOGIN_USERNAME);
         LoginWithourPasswordResponseModel response = api.auth.loginWithoutPassword(data);
 
         String[] actual = response.getPassword();
-        assertThat(stream(actual).filter(
-                x -> x.equals("This field is required.")
-        ));
+        assertThat(actual[0])
+                .isEqualTo("This field is required.");
     }
-
 }
