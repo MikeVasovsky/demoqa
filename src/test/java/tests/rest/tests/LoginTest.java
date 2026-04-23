@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static tests.rest.data.TestData.*;
 
 public class LoginTest extends BaseTest {
+
     @Test
     @DisplayName("Проверка успешнеой атворизации пользователя")
     void succesfulLogin() {

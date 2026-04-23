@@ -22,4 +22,14 @@ public class RegistrationSpec {
             .expectBody("id", notNullValue())
             .expectBody("username", notNullValue())
             .build();
+
+    public static ResponseSpecification registrationWithoutPasswordAndRepeateUsername = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(400)
+            .expectBody(matchesJsonSchemaInClasspath(
+                    "shemas/all/registration/registration_withoutpassord_and_repeate_username_shema.json"))
+            .expectBody("username", notNullValue())
+            .expectBody("password", notNullValue())
+            .build();
 }
+
