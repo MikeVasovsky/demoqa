@@ -1,4 +1,4 @@
-package tests.rest.models.login;
+package tests.rest.models.login.response;
 
 import lombok.Data;
 

@@ -1,20 +1,23 @@
 package tests.rest.api;
 
-import tests.rest.models.login.*;
+import tests.rest.models.login.request.LoginBodyWithoutPassword;
+import tests.rest.models.login.request.LoginBodyWithoutUsername;
+import tests.rest.models.login.request.LoginFullBodyModel;
+import tests.rest.models.login.response.*;
 
 import static io.restassured.RestAssured.given;
 import static tests.rest.specs.login.LoginSpecs.*;
 
 public class AuthApiClient {
 
-    public SuccessfulLoginResponseModel login(LoginFullBodyModel loginBody) {
+    public SuccessfullLoginResponseModel login(LoginFullBodyModel loginBody) {
         return given(loginRequestSpec)
                 .body(loginBody)
                 .when()
                 .post("/auth/token/")
                 .then()
                 .spec(successfullLoginResponseSpec)
-                .extract().as(SuccessfulLoginResponseModel.class);
+                .extract().as(SuccessfullLoginResponseModel.class);
     }
 
     public LoginByBadLogopassResponseModel badLogopasslogin(LoginFullBodyModel loginBody) {
@@ -35,6 +38,16 @@ public class AuthApiClient {
                 .then()
                 .spec(loginWithoutPasswordSpec)
                 .extract().as(LoginWithourPasswordResponseModel.class);
+    }
+
+    public LoginBodyWithoutUsernameResponseModel loginWithoutUsername(LoginBodyWithoutUsername loginBody) {
+        return given(loginRequestSpec)
+                .body(loginBody)
+                .when()
+                .post("/auth/token/")
+                .then()
+                .spec(loginWithoutUsernameSpec)
+                .extract().as(LoginBodyWithoutUsernameResponseModel.class);
     }
 }
 

@@ -12,13 +12,14 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static tests.rest.specs.BaseSpec.baseRequestSpec;
 
 public class LoginSpecs {
+
     public static RequestSpecification loginRequestSpec = baseRequestSpec;
 
     public static ResponseSpecification successfullLoginResponseSpec = new ResponseSpecBuilder()
             .log(ALL)
             .expectStatusCode(200)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/auth/correct_auth_token_shema.json"))
+                    "shemas/all/auth/correct_auth_token_shema.json"))
             .expectBody("access", notNullValue())
             .expectBody("refresh", notNullValue())
             .build();
@@ -28,7 +29,7 @@ public class LoginSpecs {
             .log(ALL)
             .expectStatusCode(401)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/auth/unauthorizer_response_shema.json"))
+                    "shemas/all/auth/unauthorizer_response_shema.json"))
             .expectBody("detail", notNullValue())
             .build();
 
@@ -36,7 +37,15 @@ public class LoginSpecs {
             .log(ALL)
             .expectStatusCode(400)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/auth/auth_without_password_shema.json"))
+                    "shemas/all/auth/auth_without_password_shema.json"))
             .expectBody("password", notNullValue())
+            .build();
+
+    public static ResponseSpecification loginWithoutUsernameSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(400)
+            .expectBody(matchesJsonSchemaInClasspath(
+                    "shemas/all/auth/auth_without_username_shema.json"))
+            .expectBody("username", notNullValue())
             .build();
 }
