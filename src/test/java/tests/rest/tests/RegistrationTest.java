@@ -18,6 +18,7 @@ public class RegistrationTest extends BaseTest {
     @Test
     @DisplayName("Проверка корректнгой регистрации пользователя и поля username")
     void succesfullRegistration() {
+
         RegistrationFullModel data = new RegistrationFullModel(returnRandomUsername(), returnRandomPassword());
         SuccessfullRegistrationResponseModel response = api.reg.registration(data);
 

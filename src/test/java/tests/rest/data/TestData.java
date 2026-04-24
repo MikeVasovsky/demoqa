@@ -13,11 +13,15 @@ public class TestData {
 
     public String randomPassword = f.internet().password();
     public String randomUsername = f.name().username();
+    public String randomEmail = f.internet().emailAddress();
+    public String randomFirstName = f.name().firstName();
+    public String randomLastName = f.name().lastName();
 
-    public static String returnRandomUsername(){
+    public static String returnRandomUsername() {
         return f.name().username();
     }
-    public static String returnRandomPassword(){
+
+    public static String returnRandomPassword() {
         return f.internet().password();
     }
 }
