@@ -9,9 +9,9 @@ import static tests.rest.specs.put.PutSpec.successPut;
 
 public class PutApi {
 
-    public CorrectPutResponseModel put (FullPutBodyModel bodyModel, String accessToken){
+    public CorrectPutResponseModel put(FullPutBodyModel bodyModel, String accessToken) {
         return given(putSpecification)
-                .header("Authorization", "Bearer "+accessToken)
+                .header("Authorization", "Bearer " + accessToken)
                 .body(bodyModel)
                 .when()
                 .patch("/users/me/")

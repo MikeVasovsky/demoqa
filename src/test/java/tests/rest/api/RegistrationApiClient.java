@@ -10,7 +10,7 @@ import static tests.rest.specs.registration.RegistrationSpec.*;
 
 public class RegistrationApiClient {
 
-    public SuccessfullRegistrationResponseModel registration(RegistrationFullModel registrationModel){
+    public SuccessfullRegistrationResponseModel registration(RegistrationFullModel registrationModel) {
         return given(requestSpecification)
                 .body(registrationModel)
                 .when()
@@ -20,7 +20,7 @@ public class RegistrationApiClient {
                 .extract().as(SuccessfullRegistrationResponseModel.class);
     }
 
-    public RegistrationWithoutPasswordAndRepeateUsername registrationWithoutPassAndRepeateUsername(RegistrationFullModel registrationModel){
+    public RegistrationWithoutPasswordAndRepeateUsername registrationWithoutPassAndRepeateUsername(RegistrationFullModel registrationModel) {
         return given(requestSpecification)
                 .body(registrationModel)
                 .when()
@@ -30,7 +30,7 @@ public class RegistrationApiClient {
                 .extract().as(RegistrationWithoutPasswordAndRepeateUsername.class);
     }
 
-    public RegistrationWithoutPasswordAndRepeateUsername emptyBodyRegistration(LogoutBodyModel logoutBody){
+    public RegistrationWithoutPasswordAndRepeateUsername emptyBodyRegistration(LogoutBodyModel logoutBody) {
         return given(requestSpecification)
                 .body(logoutBody)
                 .when()

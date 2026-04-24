@@ -33,5 +33,4 @@ public class LogoutSpec {
                     "shemas/all/logout/empty_refresh_shema.json"))
             .expectBody("refresh",notNullValue())
             .build();
-
 }

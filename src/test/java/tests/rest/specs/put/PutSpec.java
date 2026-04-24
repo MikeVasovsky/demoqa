@@ -24,5 +24,4 @@ public class PutSpec {
             .expectBody("email", notNullValue())
             .expectBody("remoteAddr", notNullValue())
             .build();
-
 }
