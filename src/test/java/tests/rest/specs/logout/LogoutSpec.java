@@ -25,4 +25,13 @@ public class LogoutSpec {
             .expectBody("detail",notNullValue())
             .expectBody("code",notNullValue())
             .build();
+
+    public static ResponseSpecification emptyRefreshLogout = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(400)
+            .expectBody(matchesJsonSchemaInClasspath(
+                    "shemas/all/logout/empty_refresh_shema.json"))
+            .expectBody("refresh",notNullValue())
+            .build();
+
 }

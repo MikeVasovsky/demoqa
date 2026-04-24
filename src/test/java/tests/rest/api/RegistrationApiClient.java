@@ -1,5 +1,6 @@
 package tests.rest.api;
 
+import tests.rest.models.logout.request.LogoutBodyModel;
 import tests.rest.models.registration.request.RegistrationFullModel;
 import tests.rest.models.registration.response.RegistrationWithoutPasswordAndRepeateUsername;
 import tests.rest.models.registration.response.SuccessfullRegistrationResponseModel;
@@ -29,8 +30,9 @@ public class RegistrationApiClient {
                 .extract().as(RegistrationWithoutPasswordAndRepeateUsername.class);
     }
 
-    public RegistrationWithoutPasswordAndRepeateUsername emptyBodyRegistration(){
+    public RegistrationWithoutPasswordAndRepeateUsername emptyBodyRegistration(LogoutBodyModel logoutBody){
         return given(requestSpecification)
+                .body(logoutBody)
                 .when()
                 .post("/users/register/")
                 .then()

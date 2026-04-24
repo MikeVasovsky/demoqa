@@ -1,6 +1,7 @@
 package tests.rest.api;
 
 import tests.rest.models.logout.request.LogoutBodyModel;
+import tests.rest.models.logout.response.EmptyRefreshResponseBody;
 import tests.rest.models.logout.response.LogoutIfTokenInBlacklist;
 import tests.rest.models.logout.response.SuccesfullLogoutResponseBody;
 
@@ -9,7 +10,7 @@ import static tests.rest.specs.logout.LogoutSpec.*;
 
 public class LogoutApiClient {
 
-    public SuccesfullLogoutResponseBody logout(LogoutBodyModel logoutBody){
+    public SuccesfullLogoutResponseBody logout(LogoutBodyModel logoutBody) {
         return given(logoutSpecification)
                 .body(logoutBody)
                 .when()
@@ -19,7 +20,7 @@ public class LogoutApiClient {
                 .extract().as(SuccesfullLogoutResponseBody.class);
     }
 
-    public LogoutIfTokenInBlacklist repeatLogout(LogoutBodyModel logoutBody){
+    public LogoutIfTokenInBlacklist repeatLogout(LogoutBodyModel logoutBody) {
 
         return given(logoutSpecification)
                 .body(logoutBody)
@@ -28,5 +29,16 @@ public class LogoutApiClient {
                 .then()
                 .spec(repeateLogout)
                 .extract().as(LogoutIfTokenInBlacklist.class);
+    }
+
+    public EmptyRefreshResponseBody emptyRefreshLogout(LogoutBodyModel logoutBody) {
+
+        return given(logoutSpecification)
+                .body(logoutBody)
+                .when()
+                .post("/auth/logout/")
+                .then()
+                .spec(emptyRefreshLogout)
+                .extract().as(EmptyRefreshResponseBody.class);
     }
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.rest.BaseTest;
 import tests.rest.data.TestData;
+import tests.rest.models.logout.request.LogoutBodyModel;
 import tests.rest.models.registration.request.RegistrationFullModel;
 import tests.rest.models.registration.response.RegistrationWithoutPasswordAndRepeateUsername;
 import tests.rest.models.registration.response.SuccessfullRegistrationResponseModel;
@@ -57,7 +58,8 @@ public class RegistrationTest extends BaseTest {
     @Test
     @DisplayName("Проверка корректнгой регистрации пользователя и поля username")
     void epmtyBodyRegistration() {
-        RegistrationWithoutPasswordAndRepeateUsername response = api.reg.emptyBodyRegistration();
+        LogoutBodyModel data = new LogoutBodyModel("");
+        RegistrationWithoutPasswordAndRepeateUsername response = api.reg.emptyBodyRegistration(data);
 
         assertThat(response.getUsername()[0]).isEqualTo("This field is required.");
         assertThat(response.getUsername()[0]).isEqualTo("This field is required.");
