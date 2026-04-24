@@ -18,7 +18,7 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Проверка корректнгой регистрации пользователя и поля username")
-    void succesfullRegistration() {
+    void succesfullRegistrationTest() {
 
         RegistrationFullModel data = new RegistrationFullModel(returnRandomUsername(), returnRandomPassword());
         SuccessfullRegistrationResponseModel response = api.reg.registration(data);
@@ -28,7 +28,7 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Проверка корректнгой регистрации пользователя и поля id")
-    void testIdAfterRegistration() {
+    void testIdAfterRegistrationTest() {
         RegistrationFullModel data = new RegistrationFullModel(returnRandomUsername(), returnRandomPassword());
         SuccessfullRegistrationResponseModel response = api.reg.registration(data);
 
@@ -42,7 +42,7 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @DisplayName("Проверка ошибки 400 при повторном использовании поля username и пустого поля password")
-    void repeateUsernameAndEmptyPassword() {
+    void repeateUsernameAndEmptyPasswordTest() {
         RegistrationFullModel data = new RegistrationFullModel(testData.randomUsername, testData.randomPassword);
         api.reg.registration(data);
 
@@ -57,7 +57,7 @@ public class RegistrationTest extends BaseTest {
     //Тут используются модели ответов мз прошлых тестов, тк они имеют идентичную структуру
     @Test
     @DisplayName("Проверка корректнгой регистрации пользователя и поля username")
-    void epmtyBodyRegistration() {
+    void epmtyBodyRegistrationTest() {
         LogoutBodyModel data = new LogoutBodyModel("");
         RegistrationWithoutPasswordAndRepeateUsername response = api.reg.emptyBodyRegistration(data);
 

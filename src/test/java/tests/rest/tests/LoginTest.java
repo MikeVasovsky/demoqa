@@ -15,7 +15,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     @DisplayName("Проверка успешнеой атворизации пользователя")
-    void succesfulLogin() {
+    void succesfulLoginTest() {
         LoginFullBodyModel data = new LoginFullBodyModel(LOGIN_USERNAME, LOGIN_PASSWORD);
         SuccessfullLoginResponseModel response = api.auth.login(data);
 
