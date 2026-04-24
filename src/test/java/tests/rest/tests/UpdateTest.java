@@ -36,7 +36,6 @@ public class UpdateTest extends BaseTest {
         assertThat(updateResponse.getFirstName()).isEqualTo(updateData.getFirstName());
         assertThat(updateResponse.getLastName()).isEqualTo(updateData.getLastName());
         assertThat(updateResponse.getEmail()).isEqualTo(updateData.getEmail());
-
     }
 
 }
