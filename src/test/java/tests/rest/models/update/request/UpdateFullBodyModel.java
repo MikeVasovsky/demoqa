@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class UpdateFullBodyModel {
     String username;
-    String firstname;
-    String lastname;
+    String firstName;
+    String lastName;
     String email;
 }

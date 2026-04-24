@@ -26,15 +26,16 @@ public class UpdateTest extends BaseTest {
 
         UpdateFullBodyModel updateData = new UpdateFullBodyModel(
                 td.getRandomUsername(),
-                returnRandomUsername(),
-                returnRandomUsername(),
+                td.getRandomFirstName(),
+                td.getRandomLastName(),
                 td.getRandomEmail());
 
         CorrectUpdateResponseModel updateResponse = api.updt.update(updateData, loginResponse.getAccess());
 
         assertThat(updateResponse.getUsername()).isNotEqualTo(registrationResponse.getUsername());
-        assertThat(updateResponse.getFirstName()).isEqualTo(updateData.getFirstname());
-        assertThat(updateResponse.getLastName()).isEqualTo(updateData.getLastname());
+        assertThat(updateResponse.getFirstName()).isEqualTo(updateData.getFirstName());
+        assertThat(updateResponse.getLastName()).isEqualTo(updateData.getLastName());
+        assertThat(updateResponse.getEmail()).isEqualTo(updateData.getEmail());
 
     }
 
