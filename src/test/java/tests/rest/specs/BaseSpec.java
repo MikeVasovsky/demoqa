@@ -12,6 +12,5 @@ public class BaseSpec {
             .filter(withCustomTemplate())
             .log()
             .all()
-            .contentType(JSON)
-            .basePath("/api/v1");
+            .contentType(JSON);
 }
