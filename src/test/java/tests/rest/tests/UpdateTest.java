@@ -10,6 +10,7 @@ import tests.rest.models.registration.response.SuccessfullRegistrationResponseMo
 import tests.rest.models.update.request.UpdateFullBodyModel;
 import tests.rest.models.update.response.CorrectUpdateResponseModel;
 
+import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 import static tests.rest.data.TestData.returnRandomPassword;
 import static tests.rest.data.TestData.returnRandomUsername;
@@ -17,12 +18,10 @@ import static tests.rest.data.TestData.returnRandomUsername;
 public class UpdateTest extends BaseTest {
     TestData td = new TestData();
 
+
     @Test
     void correctUpdateTest() {
         RegistrationFullModel regData = new RegistrationFullModel(returnRandomUsername(), returnRandomPassword());
-        SuccessfullRegistrationResponseModel registrationResponse = api.reg.registration(regData);
-        LoginFullBodyModel LoginData = new LoginFullBodyModel(regData.getUsername(), regData.getPassword());
-        SuccessfullLoginResponseModel loginResponse = api.auth.login(LoginData);
 
         UpdateFullBodyModel updateData = new UpdateFullBodyModel(
                 td.getRandomUsername(),
@@ -30,11 +29,22 @@ public class UpdateTest extends BaseTest {
                 td.getRandomLastName(),
                 td.getRandomEmail());
 
-        CorrectUpdateResponseModel updateResponse = api.updt.update(updateData, loginResponse.getAccess());
+        SuccessfullRegistrationResponseModel registrationResponse = step(
+                "Регистрация пользователя", () -> api.reg.registration(regData));
 
-        assertThat(updateResponse.getUsername()).isNotEqualTo(registrationResponse.getUsername());
-        assertThat(updateResponse.getFirstName()).isEqualTo(updateData.getFirstName());
-        assertThat(updateResponse.getLastName()).isEqualTo(updateData.getLastName());
-        assertThat(updateResponse.getEmail()).isEqualTo(updateData.getEmail());
+        SuccessfullLoginResponseModel loginResponse = step("Логин зарегистрированного пользователя", () -> {
+            LoginFullBodyModel LoginData = new LoginFullBodyModel(regData.getUsername(), regData.getPassword());
+            return api.auth.login(LoginData);
+        });
+
+        step("Изменение пользователя и проверки полей", () -> {
+            CorrectUpdateResponseModel updateResponse = api.updt.update(updateData, loginResponse.getAccess());
+
+            assertThat(updateResponse.getUsername()).isNotEqualTo(registrationResponse.getUsername());
+            assertThat(updateResponse.getFirstName()).isEqualTo(updateData.getFirstName());
+            assertThat(updateResponse.getLastName()).isEqualTo(updateData.getLastName());
+            assertThat(updateResponse.getEmail()).isEqualTo(updateData.getEmail());
+        });
+
     }
 }

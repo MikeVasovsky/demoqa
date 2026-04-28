@@ -33,6 +33,7 @@ dependencies {
             "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             'org.junit.platform:junit-platform-launcher',
             "io.qameta.allure:allure-selenide:2.33.0",
+            "io.qameta.allure:allure-rest-assured:2.32.0",
             "io.rest-assured:rest-assured:6.0.0",
             "io.rest-assured:json-schema-validator:6.0.0",
             "org.projectlombok:lombok:1.18.44",

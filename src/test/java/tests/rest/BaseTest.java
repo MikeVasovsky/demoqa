@@ -9,6 +9,7 @@ public class BaseTest {
 
     @BeforeAll
     public static void setUp() {
+
         RestAssured.baseURI = "https://book-club.qa.guru";
     }
 }

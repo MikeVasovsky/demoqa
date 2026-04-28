@@ -8,7 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeOptions;
-import tests.helpers.Attach;
+import tests.allure.ui.Attach;
 
 import static io.qameta.allure.Allure.step;
 import static java.lang.Boolean.parseBoolean;

@@ -10,6 +10,7 @@ import tests.rest.models.put.response.CorrectPutResponseModel;
 import tests.rest.models.registration.request.RegistrationFullModel;
 import tests.rest.models.registration.response.SuccessfullRegistrationResponseModel;
 
+import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 import static tests.rest.data.TestData.returnRandomPassword;
 import static tests.rest.data.TestData.returnRandomUsername;
@@ -20,9 +21,7 @@ public class PutTest extends BaseTest {
     @Test
     void correctPutTest() {
         RegistrationFullModel regData = new RegistrationFullModel(returnRandomUsername(), returnRandomPassword());
-        SuccessfullRegistrationResponseModel registrationResponse = api.reg.registration(regData);
-        LoginFullBodyModel LoginData = new LoginFullBodyModel(regData.getUsername(), regData.getPassword());
-        SuccessfullLoginResponseModel loginResponse = api.auth.login(LoginData);
+
 
         FullPutBodyModel updateData = new FullPutBodyModel(
                 td.getRandomUsername(),
@@ -31,11 +30,23 @@ public class PutTest extends BaseTest {
                 td.getRandomPassword(),
                 td.getRandomEmail());
 
-        CorrectPutResponseModel updateResponse = api.put.put(updateData, loginResponse.getAccess());
 
-        assertThat(updateResponse.getUsername()).isNotEqualTo(registrationResponse.getUsername());
-        assertThat(updateResponse.getFirstName()).isEqualTo(updateData.getFirstName());
-        assertThat(updateResponse.getLastName()).isEqualTo(updateData.getLastName());
-        assertThat(updateResponse.getEmail()).isEqualTo(updateData.getEmail());
+        SuccessfullRegistrationResponseModel registrationResponse = step(
+                "Регистрация пользователя", () ->
+                        api.reg.registration(regData));
+
+        SuccessfullLoginResponseModel loginResponse = step("Логин зарегистрированного пользователя", () -> {
+            LoginFullBodyModel LoginData = new LoginFullBodyModel(regData.getUsername(), regData.getPassword());
+            return api.auth.login(LoginData);
+        });
+
+        step("Вставка нового пользователя", () -> {
+            CorrectPutResponseModel updateResponse = api.put.put(updateData, loginResponse.getAccess());
+
+            assertThat(updateResponse.getUsername()).isNotEqualTo(registrationResponse.getUsername());
+            assertThat(updateResponse.getFirstName()).isEqualTo(updateData.getFirstName());
+            assertThat(updateResponse.getLastName()).isEqualTo(updateData.getLastName());
+            assertThat(updateResponse.getEmail()).isEqualTo(updateData.getEmail());
+        });
     }
 }
