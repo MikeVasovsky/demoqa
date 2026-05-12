@@ -29,7 +29,6 @@ public class LoginTest extends BaseTest {
         });
         assertThat(response.getAccess()).contains(LOGIN_TOKEN_PREFIX);
         assertThat(response.getRefresh()).contains(LOGIN_TOKEN_PREFIX);
-
     }
 
     @Test

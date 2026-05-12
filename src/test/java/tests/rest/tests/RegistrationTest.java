@@ -18,7 +18,7 @@ public class RegistrationTest extends BaseTest {
     TestData testData = new TestData();
 
     @Test
-    @DisplayName("Проверка корректнгой регистрации пользователя и поля username")
+    @DisplayName("Проверка корректной регистрации пользователя и поля username")
     void succesfullRegistrationTest() {
         step("Корректная регистрация пользователя", () -> {
             RegistrationFullModel data = new RegistrationFullModel(returnRandomUsername(), returnRandomPassword());
@@ -26,7 +26,6 @@ public class RegistrationTest extends BaseTest {
 
             assertThat(response.getUsername()).isEqualTo(data.getUsername());
         });
-
     }
 
     @Test
@@ -55,7 +54,7 @@ public class RegistrationTest extends BaseTest {
             api.reg.registration(data);
         });
 
-        step("Регистрация по тому же username и пустому полюpassword", () -> {
+        step("Регистрация по тому же username и пустому полю password", () -> {
             RegistrationFullModel secondData = new RegistrationFullModel(testData.randomUsername, "");
             RegistrationWithoutPasswordAndRepeateUsername resultResponse = api.reg
                     .registrationWithoutPassAndRepeateUsername(secondData);
