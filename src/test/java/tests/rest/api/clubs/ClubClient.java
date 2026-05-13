@@ -28,5 +28,26 @@ public class ClubClient {
                 .extract().as(CreateClubCorrectResponse.class);
     }
 
+    public int deleteClub(int id, String accessToken){
+        return given(clubsRequestSpec)
+                .header("Authorization", "Bearer "+accessToken)
+                .when()
+                .delete("/clubs/"+id+"/")
+                .then()
+                .spec(succesfullDeleteClubSpec)
+                .extract().statusCode();
+    }
+
+    public CreateClubCorrectResponse updateClub(CreateClubRequest model, String accessToken, int id){
+        return given(clubsRequestSpec)
+                .header("Authorization", "Bearer "+accessToken)
+                .body(model)
+                .when()
+                .put("/clubs/"+id+"/")
+                .then()
+                .spec(succesfullUpdateClubSpec)
+                .extract().as(CreateClubCorrectResponse.class);
+    }
+
 
 }

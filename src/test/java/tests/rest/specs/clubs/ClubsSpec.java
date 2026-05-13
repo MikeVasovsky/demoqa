@@ -26,9 +26,24 @@ public class ClubsSpec {
             .log(ALL)
             .expectStatusCode(201)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/clubs/post/correct_patch_club_shems.json"))
+                    "shemas/all/clubs/post/correct_post_club_shems.json"))
             .expectBody("id", notNullValue())
             .expectBody("bookTitle", notNullValue())
             .expectBody("bookAuthors", notNullValue())
+            .build();
+
+    public static ResponseSpecification succesfullUpdateClubSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(200)
+            .expectBody(matchesJsonSchemaInClasspath(
+                    "shemas/all/clubs/put/correct_put_club_shema.json"))
+            .expectBody("id", notNullValue())
+            .expectBody("bookTitle", notNullValue())
+            .expectBody("bookAuthors", notNullValue())
+            .build();
+
+    public static ResponseSpecification succesfullDeleteClubSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(204)
             .build();
 }

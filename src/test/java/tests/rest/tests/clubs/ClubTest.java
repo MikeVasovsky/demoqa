@@ -34,17 +34,10 @@ public class ClubTest extends BaseTest {
             return api.auth.login(data);
         });
 
-        CreateClubRequest createClubData = new CreateClubRequest(
-                t.randomTittle,
-                t.randomAuthor,
-                t.randomDate,
-                t.randomDescription,
-                TG_URL
-        );
+        CreateClubRequest createClubData = t.getNewClubData();
 
         CreateClubCorrectResponse newClub = step("Создание нового клуба", () ->
                 api.clubs.createClub(createClubData, response.getAccess()));
-
 
         GetClubByIdCorrectResponse result = step("", () -> {
                     GetClubByiDRequest data = new GetClubByiDRequest(newClub.getId());
@@ -67,19 +60,71 @@ public class ClubTest extends BaseTest {
             return api.auth.login(data);
         });
 
-        CreateClubRequest data = new CreateClubRequest(
-                t.randomTittle,
-                t.randomAuthor,
-                t.randomDate,
-                t.randomDescription,
-                TG_URL
-        );
+        CreateClubRequest data = t.getNewClubData();
 
         CreateClubCorrectResponse result = step("Создание нового клуба", () ->
                 api.clubs.createClub(data, response.getAccess()));
 
         assertThat(result.getBookTitle()).isEqualTo(data.getBookTitle());
         assertThat(result.getPublicationYear()).isEqualTo(data.getPublicationYear());
+
+        step("Удаление созданного клуба", () ->
+                api.clubs.deleteClub(result.getId(), response.getAccess()));
+    }
+
+    @Test
+    @DisplayName("Проверка удаления клуба")
+    void deleteClubTest() {
+        SuccessfullRegistrationResponseModel newUser = step("Корректная регистрация пользователя", () -> {
+            RegistrationFullModel data = new RegistrationFullModel(returnRandomUsername(), LOGIN_PASSWORD);
+            return api.reg.registration(data);
+        });
+
+        SuccessfullLoginResponseModel loginResponse = step("Логин предустановленного пользователя без регистрации", () -> {
+            LoginFullBodyModel data = new LoginFullBodyModel(newUser.getUsername(), LOGIN_PASSWORD);
+            return api.auth.login(data);
+        });
+
+        CreateClubRequest createClubReq = t.getNewClubData();
+
+        CreateClubCorrectResponse newClub = step("Создание нового клуба", () ->
+                api.clubs.createClub(createClubReq, loginResponse.getAccess()));
+
+
+        int resultStatusCode = step("Удаление созданного клуба", () ->
+                api.clubs.deleteClub(newClub.getId(), loginResponse.getAccess()));
+
+        assertThat(resultStatusCode).isEqualTo(204);
+    }
+
+    @Test
+    @DisplayName("Обновление данных клуба")
+    void updateClubTest() {
+
+        SuccessfullRegistrationResponseModel newUser = step("Корректная регистрация пользователя", () -> {
+            RegistrationFullModel data = new RegistrationFullModel(returnRandomUsername(), LOGIN_PASSWORD);
+            return api.reg.registration(data);
+        });
+
+        SuccessfullLoginResponseModel loginResponse = step("Логин предустановленного пользователя без регистрации", () -> {
+            LoginFullBodyModel data = new LoginFullBodyModel(newUser.getUsername(), LOGIN_PASSWORD);
+            return api.auth.login(data);
+        });
+
+        CreateClubRequest createClubReq = t.getNewClubData();
+
+        CreateClubCorrectResponse newClub = step("Создание нового клуба", () ->
+                api.clubs.createClub(createClubReq, loginResponse.getAccess()));
+
+        CreateClubRequest updateClubReq = t.getNewClubData();
+
+        CreateClubCorrectResponse updateClub = step("Обновление данных клуба", () ->
+                api.clubs.updateClub(updateClubReq, loginResponse.getAccess(), newClub.getId()));
+
+        assertThat(updateClub.getId()).isEqualTo(newClub.getId());
+        assertThat(updateClub.getBookTitle()).isNotEqualTo(newClub.getBookTitle());
+        assertThat(updateClub.getBookAuthors()).isNotEqualTo(newClub.getBookAuthors());
+        assertThat(updateClub.getPublicationYear()).isNotEqualTo(newClub.getPublicationYear());
     }
 
 

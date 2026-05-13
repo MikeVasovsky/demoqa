@@ -2,6 +2,7 @@ package tests.rest.data;
 
 import com.github.javafaker.Faker;
 import lombok.Data;
+import tests.rest.models.clubs.request.createClub.CreateClubRequest;
 
 
 @Data
@@ -19,17 +20,27 @@ public class TestData {
     public String randomFirstName = f.name().firstName();
     public String randomLastName = f.name().lastName();
 
-    public String randomTittle = f.book().title();
-    public String randomAuthor = f.book().author();
-    public int randomDate = f.number().numberBetween(1900, 2026);
-    public String randomDescription = f.weather().description();
-
     public static String returnRandomUsername() {
         return f.name().username();
     }
 
     public static String returnRandomPassword() {
         return f.internet().password();
+    }
+
+    public static String returnRundomTittle(){return f.book().title()+f.number().numberBetween(1,1000);}
+    public static String returnRandomAuthor(){return f.book().author()+f.number().numberBetween(1,1000);}
+    public static int returnRandomDate(){return f.number().numberBetween(1900, 2026);}
+    public static String returnRandomDescription(){return f.weather().description();}
+
+
+    public CreateClubRequest getNewClubData(){
+        return new CreateClubRequest(
+                returnRundomTittle(),
+                returnRandomAuthor(),
+                returnRandomDate(),
+                returnRandomDescription(),
+                TG_URL);
     }
 
 }
