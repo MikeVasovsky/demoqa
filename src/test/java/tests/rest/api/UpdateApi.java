@@ -1,5 +1,6 @@
 package tests.rest.api;
 
+import io.qameta.allure.Step;
 import tests.rest.models.update.request.UpdateFullBodyModel;
 import tests.rest.models.update.response.CorrectUpdateResponseModel;
 
@@ -8,6 +9,7 @@ import static tests.rest.specs.update.UpdateSpec.*;
 
 public class UpdateApi {
 
+    @Step("Обновление юзера")
     public CorrectUpdateResponseModel update (UpdateFullBodyModel updateFullBodyModel, String accessToken){
         return given(requestSpecification)
                 .header("Authorization", "Bearer "+accessToken)

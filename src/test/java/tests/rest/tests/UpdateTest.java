@@ -29,22 +29,18 @@ public class UpdateTest extends BaseTest {
                 td.getRandomLastName(),
                 td.getRandomEmail());
 
-        SuccessfullRegistrationResponseModel registrationResponse = step(
-                "Регистрация пользователя", () -> api.reg.registration(regData));
+        SuccessfullRegistrationResponseModel registrationResponse = api.reg.registration(regData);
 
-        SuccessfullLoginResponseModel loginResponse = step("Логин зарегистрированного пользователя", () -> {
-            LoginFullBodyModel LoginData = new LoginFullBodyModel(regData.getUsername(), regData.getPassword());
-            return api.auth.login(LoginData);
-        });
+        LoginFullBodyModel LoginData = new LoginFullBodyModel(regData.getUsername(), regData.getPassword());
+        SuccessfullLoginResponseModel loginResponse = api.auth.login(LoginData);
 
-        step("Изменение пользователя и проверки полей", () -> {
-            CorrectUpdateResponseModel updateResponse = api.updt.update(updateData, loginResponse.getAccess());
 
+        CorrectUpdateResponseModel updateResponse = api.updt.update(updateData, loginResponse.getAccess());
+        step("Проверка полей", () -> {
             assertThat(updateResponse.getUsername()).isNotEqualTo(registrationResponse.getUsername());
             assertThat(updateResponse.getFirstName()).isEqualTo(updateData.getFirstName());
             assertThat(updateResponse.getLastName()).isEqualTo(updateData.getLastName());
             assertThat(updateResponse.getEmail()).isEqualTo(updateData.getEmail());
         });
-
     }
 }

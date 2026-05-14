@@ -22,6 +22,7 @@ public class AuthApiClient {
                 .extract().as(SuccessfullLoginResponseModel.class);
     }
 
+    @Step("Логин неавторизованного пользователя")
     public LoginByBadLogopassResponseModel badLogopasslogin(LoginFullBodyModel loginBody) {
         return given(loginRequestSpec)
                 .body(loginBody)
@@ -32,6 +33,7 @@ public class AuthApiClient {
                 .extract().as(LoginByBadLogopassResponseModel.class);
     }
 
+    @Step("Логин пользователя без пароля")
     public LoginWithourPasswordResponseModel loginWithoutPassword(LoginBodyWithoutPassword loginBody) {
         return given(loginRequestSpec)
                 .body(loginBody)
@@ -42,6 +44,7 @@ public class AuthApiClient {
                 .extract().as(LoginWithourPasswordResponseModel.class);
     }
 
+    @Step("Логин пользователя без логина")
     public LoginBodyWithoutUsernameResponseModel loginWithoutUsername(LoginBodyWithoutUsername loginBody) {
         return given(loginRequestSpec)
                 .body(loginBody)

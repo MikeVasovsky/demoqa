@@ -22,7 +22,6 @@ public class PutTest extends BaseTest {
     void correctPutTest() {
         RegistrationFullModel regData = new RegistrationFullModel(returnRandomUsername(), returnRandomPassword());
 
-
         FullPutBodyModel updateData = new FullPutBodyModel(
                 td.getRandomUsername(),
                 td.getRandomFirstName(),
@@ -30,19 +29,13 @@ public class PutTest extends BaseTest {
                 td.getRandomPassword(),
                 td.getRandomEmail());
 
+        SuccessfullRegistrationResponseModel registrationResponse = api.reg.registration(regData);
 
-        SuccessfullRegistrationResponseModel registrationResponse = step(
-                "Регистрация пользователя", () ->
-                        api.reg.registration(regData));
+        LoginFullBodyModel LoginData = new LoginFullBodyModel(regData.getUsername(), regData.getPassword());
+        SuccessfullLoginResponseModel loginResponse = api.auth.login(LoginData);
 
-        SuccessfullLoginResponseModel loginResponse = step("Логин зарегистрированного пользователя", () -> {
-            LoginFullBodyModel LoginData = new LoginFullBodyModel(regData.getUsername(), regData.getPassword());
-            return api.auth.login(LoginData);
-        });
-
-        step("Вставка нового пользователя", () -> {
-            CorrectPutResponseModel updateResponse = api.put.put(updateData, loginResponse.getAccess());
-
+        CorrectPutResponseModel updateResponse = api.put.put(updateData, loginResponse.getAccess());
+        step("Проверки ответа", () -> {
             assertThat(updateResponse.getUsername()).isNotEqualTo(registrationResponse.getUsername());
             assertThat(updateResponse.getFirstName()).isEqualTo(updateData.getFirstName());
             assertThat(updateResponse.getLastName()).isEqualTo(updateData.getLastName());

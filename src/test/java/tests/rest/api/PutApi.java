@@ -1,5 +1,6 @@
 package tests.rest.api;
 
+import io.qameta.allure.Step;
 import tests.rest.models.put.request.FullPutBodyModel;
 import tests.rest.models.put.response.CorrectPutResponseModel;
 
@@ -9,6 +10,7 @@ import static tests.rest.specs.put.PutSpec.successPut;
 
 public class PutApi {
 
+    @Step("Обновление клуба")
     public CorrectPutResponseModel put(FullPutBodyModel bodyModel, String accessToken) {
         return given(putSpecification)
                 .header("Authorization", "Bearer " + accessToken)

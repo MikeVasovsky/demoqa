@@ -23,47 +23,46 @@ public class LoginTest extends BaseTest {
     @Test
     @DisplayName("Проверка успешнеой авторизации пользователя")
     void succesfulLoginTest() {
-        SuccessfullLoginResponseModel response = step("Логин предустановленного пользователя без регистрации", () -> {
-            LoginFullBodyModel data = new LoginFullBodyModel(LOGIN_USERNAME, LOGIN_PASSWORD);
-            return api.auth.login(data);
+        LoginFullBodyModel data = new LoginFullBodyModel(LOGIN_USERNAME, LOGIN_PASSWORD);
+        SuccessfullLoginResponseModel response = api.auth.login(data);
+
+        step("Проверки", () -> {
+            assertThat(response.getAccess()).contains(LOGIN_TOKEN_PREFIX);
+            assertThat(response.getRefresh()).contains(LOGIN_TOKEN_PREFIX);
         });
-        assertThat(response.getAccess()).contains(LOGIN_TOKEN_PREFIX);
-        assertThat(response.getRefresh()).contains(LOGIN_TOKEN_PREFIX);
     }
 
     @Test
     @DisplayName("Проверка ответа 401 при авторизации незарегистрированного пользователя")
     void unauthorizedLoginTest() {
-        LoginByBadLogopassResponseModel response = step("Логин незарегистриованного пользователя", () -> {
-            LoginFullBodyModel data = new LoginFullBodyModel(t.getRandomUsername(), t.randomPassword);
-            return api.auth.badLogopasslogin(data);
-        });
-        assertThat(response.getDetail()).isEqualTo("Invalid username or password.");
+        LoginFullBodyModel data = new LoginFullBodyModel(t.getRandomUsername(), t.randomPassword);
+        LoginByBadLogopassResponseModel response = api.auth.badLogopasslogin(data);
+
+        step("Проверка ответа", () -> assertThat(response.getDetail()).isEqualTo("Invalid username or password."));
     }
 
     @Test
     @DisplayName("Проверка ответа 400 при авторизации без пароля")
     void passwordAbsenceTest() {
-        step("Логин без пароля", () -> {
-            LoginBodyWithoutPassword data = new LoginBodyWithoutPassword(LOGIN_USERNAME);
-            LoginWithourPasswordResponseModel response = api.auth.loginWithoutPassword(data);
+        LoginBodyWithoutPassword data = new LoginBodyWithoutPassword(LOGIN_USERNAME);
+        LoginWithourPasswordResponseModel response = api.auth.loginWithoutPassword(data);
 
-            String[] actual = response.getPassword();
-            assertThat(actual[0])
-                    .isEqualTo("This field is required.");
-        });
+        String[] actual = response.getPassword();
+        step("Проверки", () ->
+                assertThat(actual[0])
+                        .isEqualTo("This field is required."));
     }
 
     @Test
     @DisplayName("Проверка ответа 400 при авторизации без логина")
     void usernameAbsenseTest() {
-        LoginBodyWithoutUsernameResponseModel response = step("Логин без логина", () -> {
-            LoginBodyWithoutUsername data = new LoginBodyWithoutUsername(LOGIN_USERNAME);
-            return api.auth.loginWithoutUsername(data);
-        });
+        LoginBodyWithoutUsername data = new LoginBodyWithoutUsername(LOGIN_USERNAME);
+        LoginBodyWithoutUsernameResponseModel response = api.auth.loginWithoutUsername(data);
 
-        String[] actual = response.getUsername();
-        assertThat(actual[0])
-                .isEqualTo("This field is required.");
+        step("Проверка ответа", () -> {
+            String[] actual = response.getUsername();
+            assertThat(actual[0])
+                    .isEqualTo("This field is required.");
+        });
     }
 }
