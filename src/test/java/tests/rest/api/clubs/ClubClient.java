@@ -1,5 +1,6 @@
 package tests.rest.api.clubs;
 
+import io.qameta.allure.Step;
 import tests.rest.models.clubs.request.createClub.CreateClubRequest;
 import tests.rest.models.clubs.response.createClub.CreateClubCorrectResponse;
 import tests.rest.models.clubs.response.getById.GetClubByIdCorrectResponse;
@@ -9,6 +10,7 @@ import static tests.rest.specs.clubs.ClubsSpec.*;
 
 public class ClubClient {
 
+    @Step("Получить клуб по id")
     public GetClubByIdCorrectResponse getById(int id){
         return given(clubsRequestSpec)
                 .get("/clubs/"+id+"/")
@@ -17,6 +19,7 @@ public class ClubClient {
                 .extract().as(GetClubByIdCorrectResponse.class);
     }
 
+    @Step("Создание клуба")
     public CreateClubCorrectResponse createClub(CreateClubRequest model, String accessToken){
         return given(clubsRequestSpec)
                 .header("Authorization", "Bearer "+accessToken)
@@ -28,6 +31,7 @@ public class ClubClient {
                 .extract().as(CreateClubCorrectResponse.class);
     }
 
+    @Step("Удаление клуба")
     public int deleteClub(int id, String accessToken){
         return given(clubsRequestSpec)
                 .header("Authorization", "Bearer "+accessToken)
@@ -38,6 +42,7 @@ public class ClubClient {
                 .extract().statusCode();
     }
 
+    @Step("Обновление данных клуба")
     public CreateClubCorrectResponse updateClub(CreateClubRequest model, String accessToken, int id){
         return given(clubsRequestSpec)
                 .header("Authorization", "Bearer "+accessToken)

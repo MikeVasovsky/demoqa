@@ -1,5 +1,6 @@
 package tests.rest.api;
 
+import io.qameta.allure.Step;
 import tests.rest.models.login.request.LoginBodyWithoutPassword;
 import tests.rest.models.login.request.LoginBodyWithoutUsername;
 import tests.rest.models.login.request.LoginFullBodyModel;
@@ -10,6 +11,7 @@ import static tests.rest.specs.login.LoginSpecs.*;
 
 public class AuthApiClient {
 
+    @Step("Логин пользователя")
     public SuccessfullLoginResponseModel login(LoginFullBodyModel loginBody) {
         return given(loginRequestSpec)
                 .body(loginBody)
