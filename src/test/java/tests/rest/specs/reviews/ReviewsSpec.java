@@ -36,4 +36,9 @@ public class ReviewsSpec {
             .expectBody("results", notNullValue())
             .build();
 
+    public static ResponseSpecification succesfullDeleteReviewResponseSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(204)
+            .build();
+
 }

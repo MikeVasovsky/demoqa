@@ -24,15 +24,27 @@ public class ReviewsClient {
     }
 
     @Step("Получение отзыва/ов")
-    public GetReviewResponse getReview(GetReviewRequestData data){
+    public GetReviewResponse getReview(GetReviewRequestData data) {
         return given(reviewRequestSpec)
                 .body(data)
                 .when()
-                .get("clubs/reviews/"+String.format(
-                        "?club=%s&page=%s&page_size=%s",data.getClub(),data.getPage(),data.getClub()))
+                .get("clubs/reviews/" + String.format(
+                        "?club=%s&page=%s&page_size=%s", data.getClub(), data.getPage(), data.getClub()))
                 .then()
                 .spec(successfullGetReviewResponseSpec)
                 .extract().as(GetReviewResponse.class);
+    }
+
+    @Step("Удаление отзыва")
+    public int deleteReview(int id, String accessToken) {
+        return given(reviewRequestSpec)
+                .header("Authorization", "Bearer "+accessToken)
+
+                .when()
+                .delete("clubs/reviews/" + id + "/")
+                .then()
+                .spec(succesfullDeleteReviewResponseSpec)
+                .extract().statusCode();
     }
 }
 

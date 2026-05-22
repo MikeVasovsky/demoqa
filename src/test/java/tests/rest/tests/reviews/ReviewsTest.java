@@ -62,6 +62,25 @@ public class ReviewsTest extends BaseTest {
         });
     }
 
+    @Test
+    @DisplayName("Удаление отзыва")
+    void deleteReviewTest(){
+        RegistrationFullModel registrationData = new RegistrationFullModel(returnRandomUsername(), LOGIN_PASSWORD);
+        SuccessfullRegistrationResponseModel newUser = api.reg.registration(registrationData);
+
+        LoginFullBodyModel loginData = new LoginFullBodyModel(newUser.getUsername(), LOGIN_PASSWORD);
+        SuccessfullLoginResponseModel loginResponse = api.auth.login(loginData);
+
+        api.members.joinToClub(4, loginResponse.getAccess());
+
+        CreateReviewRequest reviewData = new CreateReviewRequest(2 , 4, 2, returnRandomReview());
+
+        CreateReviewResponse reviewResult = api.reviews.createReview(reviewData, loginResponse.getAccess());
+
+        int statusCodeResult = api.reviews.deleteReview(reviewResult.getId(), loginResponse.getAccess());
+        step("Проверка статус кода удаления отзыва",()->
+                assertThat(204).isEqualTo(statusCodeResult));
+    }
 
     //Доделать
     @Test
