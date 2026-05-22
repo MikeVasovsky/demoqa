@@ -27,4 +27,13 @@ public class ReviewsSpec {
             .build();
 
 
+    public static ResponseSpecification successfullGetReviewResponseSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(200)
+            .expectBody(matchesJsonSchemaInClasspath(
+                    "shemas/all/review/get_review_correct_shema.json"))
+            .expectBody("count", notNullValue())
+            .expectBody("results", notNullValue())
+            .build();
+
 }

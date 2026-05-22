@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetReviewRequest {
-
+public class GetReviewRequestData {
+    int club;
+    int page;
+    int pageSize;
 }
