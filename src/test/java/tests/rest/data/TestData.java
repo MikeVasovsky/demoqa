@@ -33,6 +33,8 @@ public class TestData {
     public static int returnRandomDate(){return f.number().numberBetween(1900, 2026);}
     public static String returnRandomDescription(){return f.weather().description();}
 
+    public static String returnRandomReview(){return f.lorem().characters();}
+
 
     public CreateClubRequest getNewClubData(){
         return new CreateClubRequest(

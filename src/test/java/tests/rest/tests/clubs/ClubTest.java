@@ -25,7 +25,6 @@ public class ClubTest extends BaseTest {
     @Test
     @DisplayName("Проверка получения клуба по его id")
     void getClubByIdTest() {
-
         RegistrationFullModel data = new RegistrationFullModel(returnRandomUsername(), LOGIN_PASSWORD);
         SuccessfullRegistrationResponseModel newUser = api.reg.registration(data);
 
