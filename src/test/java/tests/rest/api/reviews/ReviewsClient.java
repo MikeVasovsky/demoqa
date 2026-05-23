@@ -3,9 +3,11 @@ package tests.rest.api.reviews;
 import io.qameta.allure.Step;
 import tests.rest.models.reviews.request.createReview.CreateReviewRequest;
 import tests.rest.models.reviews.request.getReview.GetReviewRequestData;
+import tests.rest.models.reviews.request.patchReviewRequest.PatchReviewRequest;
 import tests.rest.models.reviews.request.putReview.PutReviewRequest;
 import tests.rest.models.reviews.response.createReview.CreateReviewResponse;
 import tests.rest.models.reviews.response.getReview.GetReviewResponse;
+import tests.rest.models.reviews.response.patchReviewResponse.PatchReviewResponse;
 import tests.rest.models.reviews.response.putReview.PutReviewResponse;
 
 import static io.restassured.RestAssured.given;
@@ -59,6 +61,18 @@ public class ReviewsClient {
                 .then()
                 .spec(successfullPutReviewResponseSpec)
                 .extract().as(PutReviewResponse.class);
+    }
+
+    @Step("Редактирование отзыва")
+    public PatchReviewResponse putReview(PatchReviewRequest data, String accessToken, int id) {
+        return given(reviewRequestSpec)
+                .header("Authorization", "Bearer " + accessToken)
+                .body(data)
+                .when()
+                .patch("clubs/reviews/"+ id + "/")
+                .then()
+                .spec(successfullPatchReviewResponseSpec)
+                .extract().as(PatchReviewResponse.class);
     }
 }
 

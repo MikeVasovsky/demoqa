@@ -9,9 +9,11 @@ import tests.rest.models.registration.request.RegistrationFullModel;
 import tests.rest.models.registration.response.SuccessfullRegistrationResponseModel;
 import tests.rest.models.reviews.request.createReview.CreateReviewRequest;
 import tests.rest.models.reviews.request.getReview.GetReviewRequestData;
+import tests.rest.models.reviews.request.patchReviewRequest.PatchReviewRequest;
 import tests.rest.models.reviews.request.putReview.PutReviewRequest;
 import tests.rest.models.reviews.response.createReview.CreateReviewResponse;
 import tests.rest.models.reviews.response.getReview.GetReviewResponse;
+import tests.rest.models.reviews.response.patchReviewResponse.PatchReviewResponse;
 import tests.rest.models.reviews.response.putReview.PutReviewResponse;
 
 import static io.qameta.allure.Allure.step;
@@ -111,7 +113,33 @@ public class ReviewsTest extends BaseTest {
         });
     }
 
+    @Test
+    @DisplayName("Редактирование отзыва")
+    void patchClubTest(){
+        RegistrationFullModel registrationData = new RegistrationFullModel(returnRandomUsername(), LOGIN_PASSWORD);
+        SuccessfullRegistrationResponseModel newUser = api.reg.registration(registrationData);
 
+        LoginFullBodyModel loginData = new LoginFullBodyModel(newUser.getUsername(), LOGIN_PASSWORD);
+        SuccessfullLoginResponseModel loginResponse = api.auth.login(loginData);
+
+        api.members.joinToClub(4, loginResponse.getAccess());
+
+        CreateReviewRequest reviewData = new CreateReviewRequest(returnRandomAssement(), returnTestClub(), returnRandomReadPages(), returnRandomReview());
+
+        CreateReviewResponse reviewResult = api.reviews.createReview(reviewData, loginResponse.getAccess());
+
+        PatchReviewRequest patchReviewData = new PatchReviewRequest(returnRandomAssement(),returnTestClub(),returnRandomReadPages(),returnRandomReview());
+
+        PatchReviewResponse patchResult = api.reviews.putReview(patchReviewData,loginResponse.getAccess(),reviewResult.getId());
+
+        step("Проверка редактирования данных в отзыве", ()->{
+            assertThat(patchResult.getId()).isEqualTo(reviewResult.getId());
+            assertThat(patchResult.getReadPages()).isNotEqualTo(reviewResult.getId());
+            assertThat(patchResult.getReview()).isNotEqualTo(reviewResult.getId());
+            assertThat(patchResult.getAssessment()).isNotEqualTo(reviewResult.getAssessment());
+        });
+
+    }
 
     //Доделать
     @Test

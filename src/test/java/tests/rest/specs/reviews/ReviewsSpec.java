@@ -41,6 +41,21 @@ public class ReviewsSpec {
             .expectBody("modified", notNullValue())
             .build();
 
+    public static ResponseSpecification successfullPatchReviewResponseSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(200)
+            .expectBody(matchesJsonSchemaInClasspath(
+                    "shemas/all/review/patch_review_correct_shema.json"))
+            .expectBody("id", notNullValue())
+            .expectBody("club", notNullValue())
+            .expectBody("user", notNullValue())
+            .expectBody("review", notNullValue())
+            .expectBody("assessment", notNullValue())
+            .expectBody("readPages", notNullValue())
+            .expectBody("created", notNullValue())
+            .expectBody("modified", notNullValue())
+            .build();
+
 
     public static ResponseSpecification successfullGetReviewResponseSpec = new ResponseSpecBuilder()
             .log(ALL)
