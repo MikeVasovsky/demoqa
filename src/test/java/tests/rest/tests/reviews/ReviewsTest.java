@@ -9,8 +9,10 @@ import tests.rest.models.registration.request.RegistrationFullModel;
 import tests.rest.models.registration.response.SuccessfullRegistrationResponseModel;
 import tests.rest.models.reviews.request.createReview.CreateReviewRequest;
 import tests.rest.models.reviews.request.getReview.GetReviewRequestData;
+import tests.rest.models.reviews.request.putReview.PutReviewRequest;
 import tests.rest.models.reviews.response.createReview.CreateReviewResponse;
 import tests.rest.models.reviews.response.getReview.GetReviewResponse;
+import tests.rest.models.reviews.response.putReview.PutReviewResponse;
 
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,11 +31,11 @@ public class ReviewsTest extends BaseTest {
 
         api.members.joinToClub(4, loginResponse.getAccess());
 
-        CreateReviewRequest reviewData = new CreateReviewRequest(5, 4, 2, returnRandomReview());
+        CreateReviewRequest reviewData = new CreateReviewRequest(returnRandomAssement(), returnTestClub(), returnRandomReadPages(), returnRandomReview());
 
         CreateReviewResponse reviewResult = api.reviews.createReview(reviewData, loginResponse.getAccess());
 
-        GetReviewRequestData data = new GetReviewRequestData(reviewResult.getClub(), 1, 1);
+        GetReviewRequestData data = new GetReviewRequestData(reviewResult.getClub(), returnRandomReadPages(), returnRandomReadPages());
         GetReviewResponse result = api.reviews.getReview(data);
         step("Проверка полученного отзыва", () ->
                 assertThat(result.getResults().getFirst().getReview()).isEqualTo(reviewResult.getReview())
@@ -51,7 +53,7 @@ public class ReviewsTest extends BaseTest {
 
         api.members.joinToClub(4, loginResponse.getAccess());
 
-        CreateReviewRequest reviewData = new CreateReviewRequest(5, 4, 2, returnRandomReview());
+        CreateReviewRequest reviewData = new CreateReviewRequest(returnRandomAssement(), returnTestClub(), returnRandomReadPages(), returnRandomReview());
 
         CreateReviewResponse reviewResult = api.reviews.createReview(reviewData, loginResponse.getAccess());
         step("Проверка ответа нового созданного отзыва", () -> {
@@ -73,7 +75,7 @@ public class ReviewsTest extends BaseTest {
 
         api.members.joinToClub(4, loginResponse.getAccess());
 
-        CreateReviewRequest reviewData = new CreateReviewRequest(2 , 4, 2, returnRandomReview());
+        CreateReviewRequest reviewData = new CreateReviewRequest(returnRandomAssement(), returnTestClub(), returnRandomReadPages(), returnRandomReview());
 
         CreateReviewResponse reviewResult = api.reviews.createReview(reviewData, loginResponse.getAccess());
 
@@ -81,6 +83,35 @@ public class ReviewsTest extends BaseTest {
         step("Проверка статус кода удаления отзыва",()->
                 assertThat(204).isEqualTo(statusCodeResult));
     }
+
+    @Test
+    @DisplayName("Замена отзыва")
+    void putClubTest(){
+        RegistrationFullModel registrationData = new RegistrationFullModel(returnRandomUsername(), LOGIN_PASSWORD);
+        SuccessfullRegistrationResponseModel newUser = api.reg.registration(registrationData);
+
+        LoginFullBodyModel loginData = new LoginFullBodyModel(newUser.getUsername(), LOGIN_PASSWORD);
+        SuccessfullLoginResponseModel loginResponse = api.auth.login(loginData);
+
+        api.members.joinToClub(4, loginResponse.getAccess());
+
+        CreateReviewRequest reviewData = new CreateReviewRequest(returnRandomAssement(), returnTestClub(), returnRandomReadPages(), returnRandomReview());
+
+        CreateReviewResponse reviewResult = api.reviews.createReview(reviewData, loginResponse.getAccess());
+
+        PutReviewRequest putReviewData = new PutReviewRequest(returnRandomAssement(),returnTestClub(),returnRandomReadPages(),returnRandomReview());
+
+        PutReviewResponse putResult = api.reviews.putReview(putReviewData,loginResponse.getAccess(),reviewResult.getId());
+
+        step("Проверка замены данных в отзыве", ()->{
+            assertThat(putResult.getId()).isEqualTo(reviewResult.getId());
+            assertThat(putResult.getReadPages()).isNotEqualTo(reviewResult.getId());
+            assertThat(putResult.getReview()).isNotEqualTo(reviewResult.getId());
+            assertThat(putResult.getAssessment()).isNotEqualTo(reviewResult.getAssessment());
+        });
+    }
+
+
 
     //Доделать
     @Test
@@ -92,6 +123,6 @@ public class ReviewsTest extends BaseTest {
         LoginFullBodyModel loginData = new LoginFullBodyModel(newUser.getUsername(), LOGIN_PASSWORD);
         SuccessfullLoginResponseModel loginResponse = api.auth.login(loginData);
 
-        api.members.joinToClub(4, loginResponse.getAccess());
+        api.members.joinToClub(returnTestClub(), loginResponse.getAccess());
     }
 }

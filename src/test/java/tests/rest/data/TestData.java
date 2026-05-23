@@ -28,15 +28,40 @@ public class TestData {
         return f.internet().password();
     }
 
-    public static String returnRundomTittle(){return f.book().title()+f.number().numberBetween(1,1000);}
-    public static String returnRandomAuthor(){return f.book().author()+f.number().numberBetween(1,1000);}
-    public static int returnRandomDate(){return f.number().numberBetween(1900, 2026);}
-    public static String returnRandomDescription(){return f.weather().description();}
+    public static String returnRundomTittle() {
+        return f.book().title() + f.number().numberBetween(1, 1000);
+    }
 
-    public static String returnRandomReview(){return f.lorem().characters();}
+    public static String returnRandomAuthor() {
+        return f.book().author() + f.number().numberBetween(1, 1000);
+    }
+
+    public static int returnRandomDate() {
+        return f.number().numberBetween(1900, 2026);
+    }
+
+    public static String returnRandomDescription() {
+        return f.weather().description();
+    }
+
+    public static String returnRandomReview() {
+        return f.lorem().characters();
+    }
+
+    public static int returnRandomAssement() {
+        return f.number().numberBetween(1, 5);
+    }
+
+    public static int returnRandomReadPages() {
+        return f.number().numberBetween(1, 1000);
+    }
+
+    public static int returnTestClub(){
+        return 4;
+    }
 
 
-    public CreateClubRequest getNewClubData(){
+    public CreateClubRequest getNewClubData() {
         return new CreateClubRequest(
                 returnRundomTittle(),
                 returnRandomAuthor(),
