@@ -1,0 +1,58 @@
+package tests.booksclub.rest.api;
+
+import io.qameta.allure.Step;
+import tests.booksclub.rest.models.login.request.LoginBodyWithoutPassword;
+import tests.booksclub.rest.models.login.request.LoginBodyWithoutUsername;
+import tests.booksclub.rest.models.login.request.LoginFullBodyModel;
+import tests.booksclub.rest.models.login.response.*;
+
+import static io.restassured.RestAssured.given;
+import static tests.booksclub.rest.specs.login.LoginSpecs.*;
+
+public class AuthApiClient {
+
+    @Step("Логин пользователя")
+    public SuccessfullLoginResponseModel login(LoginFullBodyModel loginBody) {
+        return given(loginRequestSpec)
+                .body(loginBody)
+                .when()
+                .post("/auth/token/")
+                .then()
+                .spec(successfullLoginResponseSpec)
+                .extract().as(SuccessfullLoginResponseModel.class);
+    }
+
+    @Step("Логин неавторизованного пользователя")
+    public LoginByBadLogopassResponseModel badLogopasslogin(LoginFullBodyModel loginBody) {
+        return given(loginRequestSpec)
+                .body(loginBody)
+                .when()
+                .post("/auth/token/")
+                .then()
+                .spec(unauthorizedLoginResponseSpec)
+                .extract().as(LoginByBadLogopassResponseModel.class);
+    }
+
+    @Step("Логин пользователя без пароля")
+    public LoginWithourPasswordResponseModel loginWithoutPassword(LoginBodyWithoutPassword loginBody) {
+        return given(loginRequestSpec)
+                .body(loginBody)
+                .when()
+                .post("/auth/token/")
+                .then()
+                .spec(loginWithoutPasswordSpec)
+                .extract().as(LoginWithourPasswordResponseModel.class);
+    }
+
+    @Step("Логин пользователя без логина")
+    public LoginBodyWithoutUsernameResponseModel loginWithoutUsername(LoginBodyWithoutUsername loginBody) {
+        return given(loginRequestSpec)
+                .body(loginBody)
+                .when()
+                .post("/auth/token/")
+                .then()
+                .spec(loginWithoutUsernameSpec)
+                .extract().as(LoginBodyWithoutUsernameResponseModel.class);
+    }
+}
+
