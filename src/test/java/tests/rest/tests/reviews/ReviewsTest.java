@@ -64,6 +64,7 @@ public class ReviewsTest extends BaseTest {
             assertThat(reviewResult.getReadPages()).isEqualTo(reviewData.getReadPages());
             assertThat(reviewResult.getAssessment()).isEqualTo(reviewData.getAssessment());
         });
+        api.reviews.deleteReview(reviewResult.getId(), loginResponse.getAccess());
     }
 
     @Test
@@ -111,6 +112,7 @@ public class ReviewsTest extends BaseTest {
             assertThat(putResult.getReview()).isNotEqualTo(reviewResult.getId());
             assertThat(putResult.getAssessment()).isNotEqualTo(reviewResult.getAssessment());
         });
+        api.reviews.deleteReview(reviewResult.getId(), loginResponse.getAccess());
     }
 
     @Test
@@ -138,10 +140,9 @@ public class ReviewsTest extends BaseTest {
             assertThat(patchResult.getReview()).isNotEqualTo(reviewResult.getId());
             assertThat(patchResult.getAssessment()).isNotEqualTo(reviewResult.getAssessment());
         });
-
+        api.reviews.deleteReview(reviewResult.getId(), loginResponse.getAccess());
     }
 
-    //Доделать
     @Test
     @DisplayName("Проверка вступления в клуб")
     void joinToClubTest() {
@@ -151,6 +152,8 @@ public class ReviewsTest extends BaseTest {
         LoginFullBodyModel loginData = new LoginFullBodyModel(newUser.getUsername(), LOGIN_PASSWORD);
         SuccessfullLoginResponseModel loginResponse = api.auth.login(loginData);
 
-        api.members.joinToClub(returnTestClub(), loginResponse.getAccess());
+        int resultStatusCode = api.members.joinToClub(returnTestClub(), loginResponse.getAccess());
+        step("Проверка статус кода при вступении в клуб",()->
+                assertThat(resultStatusCode).isEqualTo(204));
     }
 }
