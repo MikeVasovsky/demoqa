@@ -1,9 +1,5 @@
 package tests.booksclub.rest.api;
 
-import tests.booksclub.rest.api.clubs.ClubClient;
-import tests.booksclub.rest.api.members.MembersClient;
-import tests.booksclub.rest.api.reviews.ReviewsClient;
-
 public class ApiCLient {
 
     public final AuthApiClient auth = new AuthApiClient();

@@ -1,4 +1,4 @@
-package tests.booksclub.rest.api.members;
+package tests.booksclub.rest.api;
 
 import io.qameta.allure.Step;
 

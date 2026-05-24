@@ -1,4 +1,4 @@
-package tests.booksclub.rest.api.reviews;
+package tests.booksclub.rest.api;
 
 import io.qameta.allure.Step;
 import tests.booksclub.rest.models.reviews.request.createReview.CreateReviewRequest;
