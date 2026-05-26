@@ -1,4 +1,4 @@
-package tests.booksclub.tests.api;
+package tests.booksclub.tests.api.clubs;
 
 import org.junit.jupiter.api.Test;
 import tests.booksclub.rest.models.login.request.LoginFullBodyModel;
@@ -7,6 +7,7 @@ import tests.booksclub.rest.models.put.request.FullPutBodyModel;
 import tests.booksclub.rest.models.put.response.CorrectPutResponseModel;
 import tests.booksclub.rest.models.registration.request.RegistrationFullModel;
 import tests.booksclub.rest.models.registration.response.SuccessfullRegistrationResponseModel;
+import tests.booksclub.tests.api.BaseTest;
 
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;

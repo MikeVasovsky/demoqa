@@ -1,6 +1,6 @@
 package tests.booksclub.rest.api;
 
-public class ApiCLient {
+public class ApiClient {
 
     public final AuthApiClient auth = new AuthApiClient();
     public final RegistrationApiClient reg = new RegistrationApiClient();
