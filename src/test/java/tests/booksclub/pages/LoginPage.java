@@ -1,22 +1,31 @@
 package tests.booksclub.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import lombok.Data;
-import tests.duolingo.pages.MainPage;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 @Data
-public class LoginPage extends BasePage{
+public class LoginPage {
     private SelenideElement loginFld = $("#username");
     private SelenideElement passwordFld = $("#password");
     private SelenideElement enterBtn = $(".submit-btn");
 
-    public MainPage correctLogin(String login, String password){
+    @Step("Открыть страницу логина")
+    public LoginPage openLoginPage(){
+        open("/signin");
+        return this;
+    }
+
+    @Step("Авторизация по логину и паролю")
+    public ClubsPage correctLogin(String login, String password){
         loginFld.setValue(login);
         passwordFld.setValue(password);
         enterBtn.click();
-        return new MainPage();
+        return new ClubsPage();
     }
+
 
 }

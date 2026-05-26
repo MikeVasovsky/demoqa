@@ -81,14 +81,14 @@ public class BaseTest {
 
     @AfterEach
     void afterTest() {
-        step("приложить вложения", () -> {
+        step("Приложить вложения", () -> {
             Attach.screenshotAs("Last screenshot");
             Attach.pageSource();
             Attach.browserConsoleLogs();
             Attach.addVideo();
 //        Attach.attachAsText("Some file", "Some content");
         });
-        step("закрыть браузер", Selenide::closeWebDriver);
+        step("Закрыть браузер", Selenide::closeWebDriver);
     }
 
     public void openFaviconAndSetLocalStorage(String key, String value) {
@@ -96,13 +96,19 @@ public class BaseTest {
         setLocalStorage(key, value);
     }
 
-    @Step("[API] создание нового клуба")
+    @Step("[API] Регистрация нового пользователя")
+    public void registerUser(){
+        data = new RegistrationFullModel(returnRandomUsername(), LOGIN_PASSWORD);
+        newUser = apiClient.reg.registration(data);
+    }
+
+    @Step("[API] Создание нового клуба")
     public void createNewClub(String accessLogin) {
         createClubData = t.getNewClubData();
         newClub = apiClient.clubs.createClub(createClubData, accessLogin);
     }
 
-    @Step("[API] создание юзера и его авторизация")
+    @Step("[API] Создание юзера и его авторизация")
     void createUserAndLogin() {
         data = new RegistrationFullModel(returnRandomUsername(), LOGIN_PASSWORD);
         newUser = apiClient.reg.registration(data);

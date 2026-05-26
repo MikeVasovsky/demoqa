@@ -1,20 +1,22 @@
 package tests.booksclub.tests.ui;
 
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import tests.booksclub.pages.LoginPage;
-import tests.booksclub.rest.models.login.response.SuccessfullLoginResponseModel;
 
 public class LoginTest extends BaseTest {
     LoginPage loginPage = new LoginPage();
 
-    @Step
-    public void openMainPageAfterLoginTest() {
-        SuccessfullLoginResponseModel loginResponse = openPageWithNewCreateUser();
-        createNewClub(loginResponse.getAccess());
-
-
-
+    @Test
+    @DisplayName("Проверка отображения логитна на странице профиля")
+    public void loginTest() {
+        registerUser();
+        loginPage.openLoginPage()
+                .correctLogin(
+                        data.getUsername(),
+                        data.getPassword())
+                .goToProfilePage()
+                .checkCorrectLoginInProfilePage(data);
     }
-
-
 }
