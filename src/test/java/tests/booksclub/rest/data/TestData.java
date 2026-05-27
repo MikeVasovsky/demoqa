@@ -53,7 +53,7 @@ public class TestData {
     }
 
     public static int returnRandomReadPages() {
-        return f.number().numberBetween(1, 1000);
+        return f.number().numberBetween(1, 10);
     }
 
     public static int returnTestClub(){

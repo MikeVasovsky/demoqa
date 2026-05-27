@@ -9,7 +9,6 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.openqa.selenium.chrome.ChromeOptions;
 import tests.allure.ui.Attach;
 import tests.booksclub.rest.api.ApiClient;
@@ -53,7 +52,6 @@ public class BaseTest {
     }
 
     @BeforeEach()
-    @Order(1)
     void addListener() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }

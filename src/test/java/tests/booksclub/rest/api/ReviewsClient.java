@@ -32,8 +32,10 @@ public class ReviewsClient {
         return given(reviewRequestSpec)
                 .body(data)
                 .when()
-                .get("clubs/reviews/" + String.format(
-                        "?club=%s&page=%s&page_size=%s", data.getClub(), data.getPage(), data.getClub()))
+                .queryParam("club", data.getClub())
+                .queryParam("page", data.getPage())
+                .queryParam("page_size", data.getPageSize())
+                .get("clubs/reviews/")
                 .then()
                 .spec(successfullGetReviewResponseSpec)
                 .extract().as(GetReviewResponse.class);
@@ -42,7 +44,7 @@ public class ReviewsClient {
     @Step("Удаление отзыва")
     public int deleteReview(int id, String accessToken) {
         return given(reviewRequestSpec)
-                .header("Authorization", "Bearer "+accessToken)
+                .header("Authorization", "Bearer " + accessToken)
 
                 .when()
                 .delete("clubs/reviews/" + id + "/")
@@ -57,7 +59,7 @@ public class ReviewsClient {
                 .header("Authorization", "Bearer " + accessToken)
                 .body(data)
                 .when()
-                .put("clubs/reviews/"+ id + "/")
+                .put("clubs/reviews/" + id + "/")
                 .then()
                 .spec(successfullPutReviewResponseSpec)
                 .extract().as(PutReviewResponse.class);
@@ -69,7 +71,7 @@ public class ReviewsClient {
                 .header("Authorization", "Bearer " + accessToken)
                 .body(data)
                 .when()
-                .patch("clubs/reviews/"+ id + "/")
+                .patch("clubs/reviews/" + id + "/")
                 .then()
                 .spec(successfullPatchReviewResponseSpec)
                 .extract().as(PatchReviewResponse.class);

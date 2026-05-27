@@ -46,12 +46,15 @@ public class ReviewsTest extends BaseTest {
     @Test
     @DisplayName("Получение отзыва")
     void getReviewTest() {
-        api.members.joinToClub(4, loginResponse.getAccess());
+        api.members.joinToClub(returnTestClub(), loginResponse.getAccess());
         createReview();
-        GetReviewRequestData data = new GetReviewRequestData(reviewResult.getClub(), returnRandomReadPages(), returnRandomReadPages());
+        GetReviewRequestData data = new GetReviewRequestData(reviewResult.getClub(), 1, 100);
         GetReviewResponse result = api.reviews.getReview(data);
         step("Проверка полученного отзыва", () ->
-                assertThat(result.getResults().get(0).getReview()).isEqualTo(reviewResult.getReview())
+                assertThat(result.getResults())
+                        .filteredOn(r -> r.getId() == reviewResult.getId())
+                        .extracting("review")
+                        .containsExactly(reviewResult.getReview())
         );
     }
 

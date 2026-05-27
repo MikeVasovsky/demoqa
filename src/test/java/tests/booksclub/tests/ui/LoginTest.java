@@ -1,6 +1,5 @@
 package tests.booksclub.tests.ui;
 
-import io.qameta.allure.Step;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.booksclub.pages.LoginPage;
