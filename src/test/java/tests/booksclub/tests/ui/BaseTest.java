@@ -11,7 +11,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import tests.allure.ui.Attach;
+import tests.booksclub.config.Remote;
 import tests.booksclub.config.UiTestConfig;
 import tests.booksclub.rest.api.ApiClient;
 import tests.booksclub.rest.data.TestData;
@@ -52,6 +54,15 @@ public class BaseTest {
         RestAssured.basePath = uiConfog.getPath();
         Configuration.pageLoadStrategy = uiConfog.getLoadStrategy();
         Configuration.browserCapabilities = options;
+
+        if(uiConfog.getEnv()== Remote.REMOTE){
+            Configuration.remote= uiConfog.getRemoteUrl();
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("enableVNC", true);
+            capabilities.setCapability("enableVideo", true);
+            Configuration.browserCapabilities = capabilities;
+        }
+
     }
 
     @BeforeEach()

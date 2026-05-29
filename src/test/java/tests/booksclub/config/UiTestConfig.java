@@ -2,13 +2,17 @@ package tests.booksclub.config;
 
 import org.aeonbits.owner.Config;
 
-
+@Config.LoadPolicy(Config.LoadType.MERGE)
+@Config.Sources({
+        "system:properties",
+        "classpath:${env}.properties",
+})
 
 public interface UiTestConfig extends Config {
 
     @Key("browser.name")
     @DefaultValue("CHROME")
-    String getBrowser();
+    Browser getBrowser();
 
     @Key("browser.version")
     @DefaultValue("147")
@@ -29,5 +33,12 @@ public interface UiTestConfig extends Config {
     @Key("pageLoadStrategy")
     @DefaultValue("eager")
     String getLoadStrategy();
+
+    @Key("env")
+    @DefaultValue("LOCAL")
+    Remote getEnv();
+
+    @Key("remoteUrl")
+    String getRemoteUrl();
 
 }
