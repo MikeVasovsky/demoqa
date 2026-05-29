@@ -37,8 +37,8 @@ dependencies {
             "io.rest-assured:rest-assured:6.0.0",
             "io.rest-assured:json-schema-validator:6.0.0",
             "org.projectlombok:lombok:1.18.44",
-            "org.assertj:assertj-core:3.27.7"
-
+            "org.assertj:assertj-core:3.27.7",
+            "org.aeonbits.owner:owner:1.0.12"
     )
 }
 
