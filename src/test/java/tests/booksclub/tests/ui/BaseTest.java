@@ -57,6 +57,7 @@ public class BaseTest {
 
         if(uiConfog.getEnv()== Remote.REMOTE){
             Configuration.remote= uiConfog.getRemoteUrl();
+            Configuration.baseUrl = uiConfog.getUrl();
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
