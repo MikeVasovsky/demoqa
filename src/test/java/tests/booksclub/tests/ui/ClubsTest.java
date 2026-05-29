@@ -1,6 +1,7 @@
 package tests.booksclub.tests.ui;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import tests.booksclub.pages.ClubsPage;
 import tests.booksclub.pages.OpenClubPage;
@@ -12,6 +13,7 @@ public class ClubsTest extends BaseTest {
 
 
     @Test
+    @Tag("ui-books")
     @DisplayName("Проверка отображения названия созданного клуба")
     public void openMainPageAfterLoginTest() {
         SuccessfullLoginResponseModel loginResponse = openPageWithNewCreateUser();

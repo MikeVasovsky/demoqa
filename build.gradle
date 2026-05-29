@@ -53,6 +53,12 @@ tasks.withType(Test) {
     }
 }
 
+tasks.named('test') {
+    useJUnitPlatform {
+        includeTags 'ui-books'
+    }
+}
+
 test {
     useJUnitPlatform()
     systemProperties(System.getProperties())
