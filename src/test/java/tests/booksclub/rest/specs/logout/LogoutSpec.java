@@ -21,7 +21,7 @@ public class LogoutSpec {
             .log(ALL)
             .expectStatusCode(401)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/logout/repeat_logout_shema.json"))
+                    "booksclub/shemas/all/logout/repeat_logout_shema.json"))
             .expectBody("detail",notNullValue())
             .expectBody("code",notNullValue())
             .build();
@@ -30,7 +30,7 @@ public class LogoutSpec {
             .log(ALL)
             .expectStatusCode(400)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/logout/empty_refresh_shema.json"))
+                    "booksclub/shemas/all/logout/empty_refresh_shema.json"))
             .expectBody("refresh",notNullValue())
             .build();
 }

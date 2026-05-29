@@ -6,11 +6,13 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeOptions;
 import tests.allure.ui.Attach;
+import tests.booksclub.config.UiTestConfig;
 import tests.booksclub.rest.api.ApiClient;
 import tests.booksclub.rest.data.TestData;
 import tests.booksclub.rest.models.clubs.request.createClub.CreateClubRequest;
@@ -44,10 +46,11 @@ public class BaseTest {
     @BeforeAll
     static void setUp() {
         ChromeOptions options = new ChromeOptions();
-        Configuration.baseUrl = "http://localhost:8100";
-        RestAssured.baseURI = "http://localhost:8000";
-        RestAssured.basePath = "/api/v1";
-        Configuration.pageLoadStrategy = "eager";
+        UiTestConfig uiConfog = ConfigFactory.create(UiTestConfig.class, System.getProperties());
+        Configuration.baseUrl = uiConfog.getUrl();
+        RestAssured.baseURI = uiConfog.gerUri();
+        RestAssured.basePath = uiConfog.getPath();
+        Configuration.pageLoadStrategy = uiConfog.getLoadStrategy();
         Configuration.browserCapabilities = options;
     }
 

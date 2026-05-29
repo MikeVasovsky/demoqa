@@ -16,7 +16,7 @@ public class UpdateSpec {
             .log(ALL)
             .expectStatusCode(200)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/update/correct_update_shema.json"))
+                    "booksclub/shemas/all/update/correct_update_shema.json"))
             .expectBody("id", notNullValue())
             .expectBody("username", notNullValue())
             .expectBody("firstName", notNullValue())

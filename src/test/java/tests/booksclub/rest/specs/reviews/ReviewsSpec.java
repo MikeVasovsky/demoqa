@@ -16,7 +16,7 @@ public class ReviewsSpec {
             .log(ALL)
             .expectStatusCode(201)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/review/post_review_correct_shema.json"))
+                    "booksclub/shemas/all/review/post_review_correct_shema.json"))
             .expectBody("id", notNullValue())
             .expectBody("club", notNullValue())
             .expectBody("user", notNullValue())
@@ -30,7 +30,7 @@ public class ReviewsSpec {
             .log(ALL)
             .expectStatusCode(200)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/review/put_review_correct_shema.json"))
+                    "booksclub/shemas/all/review/put_review_correct_shema.json"))
             .expectBody("id", notNullValue())
             .expectBody("club", notNullValue())
             .expectBody("user", notNullValue())
@@ -45,7 +45,7 @@ public class ReviewsSpec {
             .log(ALL)
             .expectStatusCode(200)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/review/patch_review_correct_shema.json"))
+                    "booksclub/shemas/all/review/patch_review_correct_shema.json"))
             .expectBody("id", notNullValue())
             .expectBody("club", notNullValue())
             .expectBody("user", notNullValue())
@@ -61,7 +61,7 @@ public class ReviewsSpec {
             .log(ALL)
             .expectStatusCode(200)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/review/get_review_correct_shema.json"))
+                    "booksclub/shemas/all/review/get_review_correct_shema.json"))
             .expectBody("count", notNullValue())
             .expectBody("results", notNullValue())
             .build();

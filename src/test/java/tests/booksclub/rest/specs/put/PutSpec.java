@@ -16,7 +16,7 @@ public class PutSpec {
             .log(ALL)
             .expectStatusCode(200)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/put/correct_full_put_shema.json"))
+                    "booksclub/shemas/all/put/correct_full_put_shema.json"))
             .expectBody("id", notNullValue())
             .expectBody("username", notNullValue())
             .expectBody("firstName", notNullValue())

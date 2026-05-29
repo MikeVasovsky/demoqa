@@ -18,7 +18,7 @@ public class RegistrationSpec {
             .log(ALL)
             .expectStatusCode(201)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/registration/registration_correct_shema.json"))
+                    "booksclub/shemas/all/registration/registration_correct_shema.json"))
             .expectBody("id", notNullValue())
             .expectBody("username", notNullValue())
             .build();
@@ -27,7 +27,7 @@ public class RegistrationSpec {
             .log(ALL)
             .expectStatusCode(400)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/registration/registration_withoutpassord_and_repeate_username_shema.json"))
+                    "booksclub/shemas/all/registration/registration_withoutpassord_and_repeate_username_shema.json"))
             .expectBody("username", notNullValue())
             .expectBody("password", notNullValue())
             .build();

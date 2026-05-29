@@ -16,7 +16,7 @@ public class ClubsSpec {
             .log(ALL)
             .expectStatusCode(200)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/clubs/get/correct_get_club_by_id_shema.json"))
+                    "booksclub/shemas/all/clubs/get/correct_get_club_by_id_shema.json"))
             .expectBody("id", notNullValue())
             .expectBody("bookTitle", notNullValue())
             .expectBody("bookAuthors", notNullValue())
@@ -26,7 +26,7 @@ public class ClubsSpec {
             .log(ALL)
             .expectStatusCode(201)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/clubs/post/correct_post_club_shems.json"))
+                    "booksclub/shemas/all/clubs/post/correct_post_club_shems.json"))
             .expectBody("id", notNullValue())
             .expectBody("bookTitle", notNullValue())
             .expectBody("bookAuthors", notNullValue())
@@ -36,7 +36,7 @@ public class ClubsSpec {
             .log(ALL)
             .expectStatusCode(200)
             .expectBody(matchesJsonSchemaInClasspath(
-                    "shemas/all/clubs/put/correct_put_club_shema.json"))
+                    "booksclub/shemas/all/clubs/put/correct_put_club_shema.json"))
             .expectBody("id", notNullValue())
             .expectBody("bookTitle", notNullValue())
             .expectBody("bookAuthors", notNullValue())
