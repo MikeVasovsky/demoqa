@@ -42,9 +42,15 @@ dependencies {
     )
 }
 
-tasks.withType(Test) {
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test).configureEach {
     useJUnitPlatform()
     systemProperties(System.getProperties())
+    systemProperty 'file.encoding', 'UTF-8'
+    jvmArgs '-Dstdout.encoding=UTF-8', '-Dstderr.encoding=UTF-8'
     testLogging() {
         lifecycle {
             events "started", "skipped", "failed", "STANDARD_ERROR", "STANDARD_OUT"
@@ -57,9 +63,4 @@ tasks.named('test') {
     useJUnitPlatform {
         includeTags 'ui-books'
     }
-}
-
-test {
-    useJUnitPlatform()
-    systemProperties(System.getProperties())
 }

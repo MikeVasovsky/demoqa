@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties",
-        "classpath:${env}.properties",
+        "classpath:booksclub/${env}.properties",
 })
 
 public interface UiTestConfig extends Config {

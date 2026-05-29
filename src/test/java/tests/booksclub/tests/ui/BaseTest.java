@@ -10,8 +10,6 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import tests.allure.ui.Attach;
 import tests.booksclub.config.Remote;
 import tests.booksclub.config.UiTestConfig;
@@ -47,24 +45,19 @@ public class BaseTest {
 
     @BeforeAll
     static void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        UiTestConfig uiConfog = ConfigFactory.create(UiTestConfig.class, System.getProperties());
-        Configuration.baseUrl = uiConfog.getUrl();
-        RestAssured.baseURI = uiConfog.gerUri();
-        RestAssured.basePath = uiConfog.getPath();
-        Configuration.pageLoadStrategy = uiConfog.getLoadStrategy();
-        Configuration.browserCapabilities = options;
+        UiTestConfig uiConfig = ConfigFactory.create(UiTestConfig.class, System.getProperties());
+        Configuration.browser = uiConfig.getBrowser().name().toLowerCase();
+        Configuration.browserVersion = uiConfig.getBrowserVersion();
+        Configuration.baseUrl = uiConfig.getUrl();
+        RestAssured.baseURI = uiConfig.gerUri();
+        RestAssured.basePath = uiConfig.getPath();
+        Configuration.pageLoadStrategy = uiConfig.getLoadStrategy();
 
-        if(uiConfog.getEnv()== Remote.REMOTE){
-            Configuration.remote= uiConfog.getRemoteUrl();
-            Configuration.baseUrl = uiConfog.getUrl();
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("enableVNC", true);
-            capabilities.setCapability("enableVideo", true);
-            Configuration.browserCapabilities = capabilities;
+        if (uiConfig.getEnv() == Remote.REMOTE) {
+            Configuration.remote = uiConfig.getRemoteUrl();
         }
-
     }
+
 
     @BeforeEach()
     void addListener() {
